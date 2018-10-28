@@ -1,0 +1,12 @@
+- name: install package
+  package: name="git" state="present"
+  become: true
+- name: configure
+  git_config: name="{{ item.key }}" value="{{ item.value }}" scope="global"
+  become: true
+  become_user: "{{ user }}"
+  with_items:
+    - { key: "user.name", value: "{{ name }}" }
+    - { key: "user.email", value: "{{ email }}" }
+    - { key: "user.signingkey", value: "{{ email }}" }
+    - { key: "commit.gpgsign", value: "true" }

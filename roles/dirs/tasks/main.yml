@@ -1,0 +1,14 @@
+---
+- name: create directories
+  become: true
+  become_user: "{{ user }}"
+  file: path="~/{{ item }}" state="directory"
+  with_items: [ bin, src, docs, downloads, pics, vids ]
+- name: create config directory
+  become: true
+  become_user: "{{ user }}"
+  file: path="~/.config" state="directory"
+- name: render user dirs config
+  become: true
+  become_user: "{{ user }}"
+  template: src="templates/user-dirs.env.j2" dest="~/.config/user-dirs.dirs"

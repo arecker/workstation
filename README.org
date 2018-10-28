@@ -1,0 +1,23 @@
+#+TITLE: Workstation
+#+STARTUP: showall
+
+* Before
+
+1. Install =ansible=.
+
+2. Populate =~/.ansible-password= with ansible vault password.
+
+* Running
+
+#+BEGIN_SRC sh
+  ansible-playbook --vault-password-file ~/.ansible-password -i hosts --ask-sudo-pass site.yml
+#+END_SRC
+
+* After
+
+1. Edit the imported private key with =gpg --edit-key= and run =trust=
+   to change the trust level.
+
+2. Run =pyenv-bootstrap.sh= to install python.
+
+3. Run =rbenv-bootstrap.sh= to install ruby.

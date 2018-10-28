@@ -1,0 +1,16 @@
+---
+- hosts: local
+  roles:
+    - tty
+    - bash
+    - dirs
+    - gpg
+    - ssh
+    - git
+    - pass
+    - emacs-config
+    - emacs-build
+    - emacs-daemon
+    - lisp
+    - python
+    - ruby

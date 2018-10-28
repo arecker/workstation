@@ -1,0 +1,7 @@
+- name: install package
+  package: name="pass" state="present"
+  become: true
+- name: clone password store
+  git: repo="ssh://git@gitlab.com/arecker/password-store" dest="~/.password-store" accept_hostkey="yes" update="no"
+  become: true
+  become_user: "{{ user }}"
