@@ -1,0 +1,7 @@
+- block:
+  - name: make config directory
+    file: path="~/.aws" state="directory" mode="700"
+  - name: copy credentials
+    copy: src="files/credentials" dest="~/.aws/credentials" mode="600"
+  become: true
+  become_user: "{{ user }}"

@@ -14,10 +14,7 @@ if [ -d "$HOME/.rbenv" ]; then
 fi
 
 log "running installer"
-curl -Ls "https://github.com/rbenv/rbenv-installer/raw/master/bin/rbenv-installer" | PATH="$HOME/.rbenv/bin:$PATH" bash
-
-log "initializing"
-eval "$($HOME/.rbenv/bin/rbenv init -)"
+curl -Ls "https://github.com/rbenv/rbenv-installer/raw/master/bin/rbenv-installer" | PATH="$HOME/.rbenv/bin:$HOME/.rbenv/shims:$PATH" bash
 
 log "installing $RUBY_VERSION"
 $HOME/.rbenv/bin/rbenv install "$RUBY_VERSION"

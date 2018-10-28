@@ -1,0 +1,18 @@
+- name: install xorg package
+  package: name="xorg" state="present"
+  become: true
+- name: install inconsolata
+  package: name="fonts-inconsolata" state="present"
+  become: true
+- name: install urxvt
+  package: name="rxvt-unicode" state="present"
+  become: true
+- name: install xscreensaver
+  package: name="{{ item }}" state="present"
+  become: true
+  with_items:
+    - xscreensaver
+    - xscreensaver-data
+    - xscreensaver-data-extra
+    - xscreensaver-gl
+    - xscreensaver-gl-extra

@@ -14,3 +14,6 @@
     - lisp
     - python
     - ruby
+    - aws
+    - pulseaudio
+    - xorg
