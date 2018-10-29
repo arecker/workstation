@@ -12,7 +12,7 @@ if [ -d "$HOME/.quicklisp" ]; then
 fi
 
 log "downloading quicklisp library"
-curl -sO /tmp/quicklisp.lisp https://beta.quicklisp.org/quicklisp.lisp
+curl -s -o /tmp/quicklisp.lisp https://beta.quicklisp.org/quicklisp.lisp
 
 log "running quicklisp installer"
 sbcl --load /tmp/quicklisp.lisp --eval '(quicklisp-quickstart:install :path "~/.quicklisp/")'

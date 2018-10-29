@@ -1,0 +1,13 @@
+---
+- name: clone source
+  git: repo="https://github.com/stumpwm/stumpwm" dest="~/src/stumpwm" update="no"
+  become: true
+  become_user: "{{ user }}"
+- name: clone config
+  git: repo="ssh://git@github.com/arecker/stumpwm.d" dest="~/.stumpwm.d" update="no" accept_hostkey="yes"
+  become: true
+  become_user: "{{ user }}"
+- name: copy xinitrc
+  copy: src="files/xinitrc.sh" dest="~/.xinitrc" mode="755"
+  become: true
+  become_user: "{{ user }}"
