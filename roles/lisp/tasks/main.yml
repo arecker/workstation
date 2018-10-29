@@ -1,3 +1,11 @@
 - name: install package
   package: name="sbcl" state="present"
   become: true
+- name: copy sbcl config
+  copy: src="files/sbclrc.lisp" dest="~/.sbclrc"
+  become: true
+  become_user: "{{ user }}"
+- name: link bootstrap script
+  file: src="{{ playbook_dir }}/roles/lisp/files/sbcl-bootstrap.sh" dest="~/bin/sbcl-bootstrap.sh" state="hard"
+  become: true
+  become_user: "{{ user }}"

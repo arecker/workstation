@@ -16,10 +16,6 @@ fi
 log "running installer"
 curl -Ls "https://github.com/pyenv/pyenv-installer/raw/master/bin/pyenv-installer" | PATH="$HOME/.pyenv/bin:$PATH" bash
 
-log "initializing"
-eval "$($HOME/.pyenv/bin/pyenv init -)"
-eval "$($HOME/.pyenv/bin/pyenv virtualenv-init -)"
-
 log "installing $PYTHON_VERSION"
 $HOME/.pyenv/bin/pyenv install "$PYTHON_VERSION"
 
