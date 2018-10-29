@@ -21,3 +21,5 @@
 2. Run =pyenv-bootstrap.sh= to install python.
 
 3. Run =rbenv-bootstrap.sh= to install ruby.
+
+4. Run =sbcl-bootstrap.sh= to install quicklisp.
