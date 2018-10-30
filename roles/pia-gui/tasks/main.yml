@@ -1,0 +1,21 @@
+- name: install dependencies
+  package: name="{{ item }}" state="present"
+  become: true
+  with_items:
+    - network-manager
+    - network-manager-gnome
+    - network-manager-openvpn
+    - network-manager-openvpn-gnome
+    - zip
+- name: copy network manager config
+  copy: src="files/NetworkManager.conf" dest="/etc/NetworkManager/NetworkManager.conf" mode="644" owner="root" group="root"
+  become: true
+- name: create pia configs directory
+  file: path="{{ item }}" state="directory"
+  become: true
+  become_user: "{{ user }}"
+  with_items: [ "~/docs", "~/docs/pia" ]
+- name: download configs
+  unarchive: src="http://www.privateinternetaccess.com/openvpn/openvpn.zip" dest="~/docs/pia" remote_src="yes"
+  become: true
+  become_user: "{{ user }}"
