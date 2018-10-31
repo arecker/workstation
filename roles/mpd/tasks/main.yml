@@ -1,0 +1,29 @@
+- name: install packages
+  package: name="{{ item }}" state="present"
+  become: True
+  with_items:
+    - mpd
+    - ncmpcpp
+- name: stop system wide service
+  systemd: name="mpd" state="stopped" enabled="False"
+  become: True
+- block:
+  - name: make directories
+    file: path="{{ item }}" state="directory" mode="755"
+    with_items:
+      - "~/.config"
+      - "~/.config/mpd"
+      - "~/.lyrics"
+      - "~/.ncmpcpp/"
+      - "~/.mpd"
+      - "~/.mpd/playlists"
+      - "~/music"
+  - name: render server config
+    template: src="templates/mpd.conf.j2" dest="~/.config/mpd/mpd.conf" mode="644"
+    notify: [ reload mpd ]
+  - name: copy client config
+    copy: src="files/ncmpcpp.conf" dest="~/.ncmpcpp/config" mode="644"
+  - name: start service
+    systemd: name="mpd" state="started" enabled="True" user="True"
+  become: True
+  become_user: "{{ user }}"
