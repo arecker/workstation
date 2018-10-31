@@ -5,3 +5,9 @@
   with_items:
     - { "url": "git@gitlab.com:arecker/blog.git", "dest": "~/src/blog" }
     - { "url": "git@gitlab.com:arecker/notes.git", "dest": "~/src/notes" }
+- name: link some scripts
+  file: src="{{ playbook_dir }}/roles/repos/files/{{ item }}" dest="~/bin/{{ item }}" state="hard"
+  become: true
+  become_user: "{{ user }}"
+  with_items:
+    - notes-sync.sh
