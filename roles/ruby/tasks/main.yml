@@ -7,7 +7,7 @@
     - build-essential
     - libffi-dev
     - libgdbm-dev
-    - libgdbm3
+    # - libgdbm3
     - libncurses5-dev
     - libreadline6-dev
     - libssl-dev

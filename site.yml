@@ -10,13 +10,13 @@
     - repos
     - pass
     - emacs-config
-    - emacs-build
-    - emacs-daemon
+    # - emacs-build
+    # - emacs-daemon
     - lisp
     - python
     - ruby
     - aws
-    - pulseaudio
-    - xorg
-    - pia-gui
-    - mpd
+    # - pulseaudio
+    # - xorg
+    # - pia-gui
+    # - mpd
