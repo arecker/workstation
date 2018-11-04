@@ -4,7 +4,7 @@ export EDITOR="emacsclient"
 
 # aliases
 alias ls="ls --color"
-#alias firefox="$HOME/.firefox/firefox"
+alias be="bundle exec"
 
 # python
 if [ -d "$HOME/.pyenv" ]; then
