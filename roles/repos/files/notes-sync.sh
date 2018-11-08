@@ -10,7 +10,7 @@ log() {
 cd "$REPO_PATH"
 
 log "fetching"
-git fetch --all --prune > /dev/null
+git fetch --all --prune --quiet
 
 log "comitting changes"
 git add -A && git commit -m "notes-sync.sh: $(date)" > /dev/null
@@ -19,7 +19,7 @@ log "rebasing"
 git rebase origin/master > /dev/null
 
 log "pushing"
-git push origin master > /dev/null
+git push origin master --quiet > /dev/null
 
 log "finished!"
 cd "$CUR_DIR"
