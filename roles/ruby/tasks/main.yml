@@ -7,7 +7,7 @@
     - build-essential
     - libffi-dev
     - libgdbm-dev
-    # - libgdbm3
+    - libgdm-dev
     - libncurses5-dev
     - libreadline6-dev
     - libssl-dev
@@ -18,6 +18,6 @@
   become: true
   become_user: "{{ user }}"
 - name: link rbenv-bootstrap.sh
-  file: src="{{ playbook_dir }}/roles/ruby/files/rbenv-bootstrap.sh" dest="~/bin/rbenv-bootstrap.sh" state="hard"
+  file: src="{{ playbook_dir }}/roles/ruby/files/rbenv-bootstrap.sh" dest="~/bin/rbenv-bootstrap.sh" state="link" owner="{{ user }}" group="{{ user }}"
   become: true
   become_user: "{{ user }}"

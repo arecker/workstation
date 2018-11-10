@@ -5,6 +5,7 @@
   with_items:
   - build-essential
   - curl
+  - git
   - libbz2-dev
   - libffi-dev
   - liblzma-dev
@@ -19,7 +20,11 @@
   - wget
   - xz-utils
   - zlib1g-dev
+- name: make bin
+  file: path="~/bin" state="directory"
+  become: true
+  become_user: "{{ user }}"
 - name: link bootstrap script
-  file: src="{{ playbook_dir }}/roles/python/files/pyenv-bootstrap.sh" dest="~/bin/pyenv-bootstrap.sh" state="hard"
+  file: src="{{ playbook_dir }}/roles/python/files/pyenv-bootstrap.sh" dest="~/bin/pyenv-bootstrap.sh" state="link" owner="alex" group="alex"
   become: true
   become_user: "{{ user }}"

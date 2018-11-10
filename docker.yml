@@ -1,0 +1,6 @@
+---
+- hosts: local
+  roles:
+    - bash
+    - python
+    - ruby
