@@ -1,8 +1,0 @@
----
-- hosts: local
-  roles:
-    - bash
-    - python
-    - ruby
-    - aws-package
-    - emacs-ppa
