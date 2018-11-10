@@ -22,4 +22,7 @@ $HOME/.rbenv/bin/rbenv install "$RUBY_VERSION"
 log "setting $RUBY_VERSION as global"
 $HOME/.rbenv/bin/rbenv global "$RUBY_VERSION"
 
+log "installing bundler"
+$HOME/.rbenv/shims/gem install bundler
+
 log "done!"
