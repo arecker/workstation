@@ -18,7 +18,5 @@
     when: not gnupg_dir.stat.exists
   - name: delete import directory
     file: path="~/gpg_import" state="absent"
-  - name: copy authinfo
-    copy: src="files/authinfo.gpg" dest="~/.authinfo.gpg" mode="644"
   become: true
   become_user: "{{ user }}"
