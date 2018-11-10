@@ -14,4 +14,4 @@ WORKDIR /home/alex
 USER alex
 RUN /home/alex/bin/pyenv-bootstrap.sh
 RUN /home/alex/bin/rbenv-bootstrap.sh
-ENTRYPOINT /bin/bash
+ENTRYPOINT /bin/bash --login
