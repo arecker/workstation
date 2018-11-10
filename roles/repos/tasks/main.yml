@@ -5,8 +5,9 @@
   with_items:
     - { "url": "git@gitlab.com:arecker/docs.git", "dest": "~/docs" }
     - { "url": "git@gitlab.com:arecker/blog.git", "dest": "~/src/blog" }
+    - { "url": "git@gitlab.com:arecker/reckerops.git", "dest": "~/src/reckerops" }
 - name: link some scripts
-  file: src="{{ playbook_dir }}/roles/repos/files/{{ item }}" dest="~/bin/{{ item }}" state="hard"
+  file: src="{{ playbook_dir }}/roles/repos/files/{{ item }}" dest="~/bin/{{ item }}" state="link"
   become: true
   become_user: "{{ user }}"
   with_items:
