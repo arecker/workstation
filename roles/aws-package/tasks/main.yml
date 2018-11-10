@@ -1,0 +1,3 @@
+- name: install package
+  package: name="awscli" state="present"
+  become: True

@@ -5,6 +5,7 @@
     - autoconf
     - bison
     - build-essential
+    - git
     - libffi-dev
     - libgdbm-dev
     - libgdm-dev
