@@ -3,7 +3,7 @@
   become: true
   become_user: "{{ user }}"
   file: path="~/{{ item }}" state="directory"
-  with_items: [ bin, src, docs, downloads, pics, vids ]
+  with_items: [ bin, src, downloads, pics, vids ]
 - name: create config directory
   become: true
   become_user: "{{ user }}"
