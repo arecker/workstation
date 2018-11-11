@@ -1,3 +1,6 @@
+- name: install jq
+  package: name="jq" state="present"
+  become: true
 - name: clone some repos
   git: repo="{{ item.url }}" dest="{{ item.dest }}" accept_hostkey="yes" update="no"
   become: true
@@ -12,3 +15,4 @@
   become_user: "{{ user }}"
   with_items:
     - docs-sync.sh
+    - blog-publish.sh
