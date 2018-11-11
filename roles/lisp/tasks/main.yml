@@ -6,6 +6,6 @@
   become: true
   become_user: "{{ user }}"
 - name: link bootstrap script
-  file: src="{{ playbook_dir }}/roles/lisp/files/sbcl-bootstrap.sh" dest="~/bin/sbcl-bootstrap.sh" state="link"
+  file: src="{{ playbook_dir }}/roles/lisp/files/sbcl-bootstrap.sh" dest="~/bin/sbcl-bootstrap.sh" state="hard"
   become: true
   become_user: "{{ user }}"

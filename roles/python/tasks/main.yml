@@ -25,6 +25,6 @@
   become: true
   become_user: "{{ user }}"
 - name: link bootstrap script
-  file: src="{{ playbook_dir }}/roles/python/files/pyenv-bootstrap.sh" dest="~/bin/pyenv-bootstrap.sh" state="link" owner="alex" group="alex"
+  file: src="{{ playbook_dir }}/roles/python/files/pyenv-bootstrap.sh" dest="~/bin/pyenv-bootstrap.sh" state="hard" owner="alex" group="alex"
   become: true
   become_user: "{{ user }}"

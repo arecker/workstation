@@ -19,6 +19,6 @@
   become: true
   become_user: "{{ user }}"
 - name: link rbenv-bootstrap.sh
-  file: src="{{ playbook_dir }}/roles/ruby/files/rbenv-bootstrap.sh" dest="~/bin/rbenv-bootstrap.sh" state="link" owner="{{ user }}" group="{{ user }}"
+  file: src="{{ playbook_dir }}/roles/ruby/files/rbenv-bootstrap.sh" dest="~/bin/rbenv-bootstrap.sh" state="hard" owner="{{ user }}" group="{{ user }}"
   become: true
   become_user: "{{ user }}"
