@@ -3,8 +3,11 @@ export PATH="$HOME/bin:$PATH"
 export EDITOR="emacsclient"
 
 # aliases
-alias ls="ls --color"
 alias be="bundle exec"
+
+if [[ "$(uname)" != "Darwin" ]]; then
+    alias ls="ls --color"
+fi
 
 # pyenv
 if [ -d "$HOME/.pyenv" ]; then

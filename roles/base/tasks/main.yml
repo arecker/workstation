@@ -4,7 +4,7 @@
 - name: make bin directory
   file: path="~/bin" state="directory" mode="700"
 - name: link bashrc
-  file: src="{{ playbook_dir }}/roles/base/files/bashrc.sh" dest="~/.bashrc" state="hard"
+  file: src="{{ playbook_dir }}/roles/base/files/bashrc.sh" dest="{{ bashrc_file }}" state="hard"
 
 - name: make ssh directory
   file: path="~/.ssh" state="directory" mode="700"
@@ -54,7 +54,7 @@
 - name: install pyenv dependencies
   package: name="{{ item }}" state="present"
   become: true
-  when: "{{ ansible_distribution != 'MacOSX' }}"
+  when: ansible_distribution != 'MacOSX'
   with_items:
   - build-essential
   - curl
@@ -86,7 +86,7 @@
 
 - name: install rbenv dependencies
   package: name="{{ item }}" state="present"
-  when: "{{ ansible_distribution != 'MacOSX' }}"
+  when: ansible_distribution != 'MacOSX'
   become: true
   with_items:
     - autoconf
