@@ -2,7 +2,7 @@ Include work/config
 
 Host *
   ForwardAgent yes
-  IdentityFile ~/.ssh/personal
+  IdentityFile ~/.ssh/id_rsa
   StrictHostKeyChecking no
   User alex
   UserKnownHostsFile /dev/null

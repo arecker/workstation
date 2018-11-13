@@ -1,4 +1,8 @@
-[includeIf "gitdir:~/"]
-  path = .gitconfig-personal
+[user]
+	name = Alex Recker
+	email = alex@reckerfamily.com
+	signingkey = alex@reckerfamily.com
+[commit]
+	gpgsign = true
 [includeIf "gitdir:~/src/work/"]
   path = .gitconfig-work

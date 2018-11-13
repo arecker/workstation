@@ -46,7 +46,7 @@
       become: true
 
     - name: fix default keyboard
-      lineinffile: name="/etc/default/keyboard" regexp="^XKBOPTIONS" line="XKBOPTIONS=\"ctrl:nocaps\""
+      lineinfile: name="/etc/default/keyboard" regexp="^XKBOPTIONS" line="XKBOPTIONS=\"ctrl:nocaps\""
       become: true
 
     - name: clone emacs source
