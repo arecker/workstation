@@ -1,8 +1,14 @@
+Include work/config
+
 Host *
+  ForwardAgent yes
   IdentityFile ~/.ssh/personal
   StrictHostKeyChecking no
+  User alex
   UserKnownHostsFile /dev/null
 
 Host fileboi
   Hostname 10.0.0.100
-  User alex
+
+Host stealy
+  Hostname 10.0.0.101

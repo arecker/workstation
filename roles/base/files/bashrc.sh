@@ -1,11 +1,10 @@
-export PS1="\u@\h:\w\$ "
+export EDITOR="nano"
 export PATH="$HOME/bin:$PATH"
-export EDITOR="emacsclient"
+export PS1="\u@\h:\w\$ "
 
 # aliases
 alias be="bundle exec"
-
-if [[ "$(uname)" != "Darwin" ]]; then
+if [ "$(uname)" != "Darwin" ]; then
     alias ls="ls --color"
 fi
 
@@ -20,4 +19,10 @@ fi
 if [ -d "$HOME/.rbenv" ]; then
   export PATH="$HOME/.rbenv/bin:$PATH"
   eval "$(rbenv init -)"
+fi
+
+# ssh
+ssh-add -k ~/.ssh/personal 2>/dev/null
+if [ -f "$HOME/.ssh/work/id_rsa" ]; then
+    ssh-add -k ~/.ssh/work/id_rsa 2>/dev/null
 fi
