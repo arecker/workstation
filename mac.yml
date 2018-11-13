@@ -3,6 +3,45 @@
 
   vars:
     bashrc_file: ~/.profile
+    work_files_path: ~/src/work/devops/arecker/workstation
 
   roles:
     - base
+
+  tasks:
+    - name: copy private ssh key
+      copy: src="{{ work_files_path }}/id_rsa" dest="~/.ssh/work/id_rsa" mode="500"
+    - name: copy public ssh key
+      copy: src="{{ work_files_path }}/id_rsa.pub" dest="~/.ssh/work/id_rsa.pub" mode="744"
+    - name: link ssh config
+      file: src="{{ work_files_path }}/ssh_config" dest="~/.ssh/work/config" state="hard"
+    - name: read in repos to clone
+      include_vars: file="{{ work_files_path }}/vars.yml" name="work_vars"
+    - name: clone work repos
+      git: repo="git@github.com:zendesk/{{ item }}.git" dest="~/src/work/{{ item }}" update="no" accept_hostkey="yes" key_file="~/.ssh/work/id_rsa"
+      with_items: "{{ work_vars.repos }}"
+    - name: install some packages
+      package: name="{{ item }}" state="present"
+      with_items:
+        - ansible
+        - archey
+        - asciiquarium
+        - aspell
+        - clisp
+        - cmatrix
+        - cowsay
+        - gcc
+        - git
+        - htop
+        - ispell
+        - jq
+        - lua
+        - nmap
+        - packer
+        - sqlite
+        - terraform
+        - tree
+        - vault
+        - vim
+        - youtube-dl
+        - zsh
