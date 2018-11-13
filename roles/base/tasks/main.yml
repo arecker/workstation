@@ -119,3 +119,6 @@
     creates: ~/.quicklisp
 - name: link sbcl config
   file: src="{{ playbook_dir }}/roles/base/files/sbclrc.lisp" dest="~/.sbclrc" state="hard"
+
+- name: link emacs-build.sh
+  file: src="{{ playbook_dir }}/roles/base/files/emacs-build.sh" dest="~/bin/emacs-build.sh" state="hard"

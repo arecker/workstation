@@ -8,14 +8,32 @@
       package: name="{{ item }}" state="present"
       become: true
       with_items:
+        - autoconf
+        - automake
+        - build-essential
         - fonts-inconsolata
+        - libdbus-1-dev
+        - libgif-dev
+        - libgnutls28-dev
+        - libgtk2.0-dev
+        - libjpeg-dev
+        - libm17n-dev
+        - libncurses5-dev
+        - libotf-dev
+        - libpng-dev
+        - librsvg2-dev
+        - libtiff-dev
+        - libtool
+        - libxml2-dev
         - network-manager
         - network-manager-gnome
         - network-manager-openvpn
         - network-manager-openvpn-gnome
         - pavucontrol
         - pulseaudio
+        - texinfo
         - xorg
+        - xorg-dev
         - xscreensaver
         - xscreensaver-data
         - xscreensaver-data-extra
@@ -30,3 +48,6 @@
     - name: fix default keyboard
       lineinffile: name="/etc/default/keyboard" regexp="^XKBOPTIONS" line="XKBOPTIONS=\"ctrl:nocaps\""
       become: true
+
+    - name: clone emacs source
+      git: repo="git://git.sv.gnu.org/emacs.git" dest="~/src/emacs" update="no"

@@ -16,8 +16,8 @@ build() {
     log "checking out $1"
     git checkout "$1"
     log "building $1"
-    $EMACS_SRC/autogen.sh
-    $EMACS_SRC/configure --prefix="$HOME/.local/" -with-x-toolkit --with-xft
+    ./autogen.sh
+    ./configure --prefix="$HOME/.local/" -with-x-toolkit --with-xft
     make bootstrap
     log "installing $1"
     make install

@@ -1,6 +1,0 @@
-- name: add ppa
-  apt_repository: repo="ppa:kelleyk/emacs"
-  become: true
-- name: install package
-  package: name="emacs" state="present"
-  become: true
