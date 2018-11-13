@@ -1,0 +1,108 @@
+- name: make bin directory
+  file: path="~/bin" state="directory" mode="700"
+- name: link bashrc
+  file: src="{{ playbook_dir }}/roles/base/files/bashrc.sh" dest="~/.bashrc" state="hard"
+
+- name: make ssh directory
+  file: path="~/.ssh" state="directory" mode="700"
+- name: copy ssh keys
+  copy: src="files/{{ item }}" dest="~/.ssh/{{ item }}" mode="400"
+  with_items: [ personal, personal.pub ]
+- name: link ssh config
+  file: src="{{ playbook_dir }}/roles/base/files/ssh_config" dest="~/.ssh/config" state="hard"
+
+- name: install git
+  package: name="git" state="present"
+  become: "{{ ansible_distribution != 'MacOSX' }}"
+- name: link git configs
+  file: src="{{ playbook_dir }}/roles/base/files/{{ item }}" dest="~/.{{ item }}" state="hard"
+  with_items: [ "gitconfig", "gitconfig-personal", "gitconfig-work" ]
+
+- name: install pass
+  package: name="pass" state="present"
+  become: "{{ ansible_distribution != 'MacOSX' }}"
+- name: clone password store
+  git: repo="ssh://git@gitlab.com/arecker/password-store" dest="~/.password-store" accept_hostkey="yes" key_file="~/.ssh/personal" update="no"
+
+- name: clone emacs config
+  git: repo="ssh://git@github.com/arecker/emacs.d" dest="~/.emacs.d" accept_hostkey="yes" key_file="~/.ssh/personal" update="no"
+
+- name: clone docs
+  git: repo="git@gitlab.com:arecker/docs.git" dest="~/docs" accept_hostkey="yes" key_file="~/.ssh/personal" update="no"
+- name: link docs-sync.sh
+  file: src="{{ playbook_dir }}/roles/base/files/docs-sync.sh" dest="~/bin/docs-sync.sh" state="hard"
+
+- name: create src directory
+  file: path="~/src" state="directory"
+
+- name: clone blog
+  git: repo="git@gitlab.com:arecker/blog.git" dest="~/src/blog" accept_hostkey="yes" key_file="~/.ssh/personal" update="no"
+- name: link blog-publish.sh
+  file: src="{{ playbook_dir }}/roles/base/files/blog-publish.sh" dest="~/bin/blog-publish.sh" state="hard"
+- name: create public directory
+  file: path="~/public" state="directory"
+
+- name: clone reckerops
+  git: repo="git@gitlab.com:arecker/reckerops.git" dest="~/src/reckerops" accept_hostkey="yes" key_file="~/.ssh/personal" update="no"
+
+- name: link aws-personal
+  file: src="{{ playbook_dir }}/roles/base/files/aws-personal.sh" dest="~/bin/aws-personal" state="hard"
+
+- name: install pyenv dependencies
+  package: name="{{ item }}" state="present"
+  become: true
+  when: "{{ ansible_distribution != 'MacOSX' }}"
+  with_items:
+  - build-essential
+  - curl
+  - git
+  - libbz2-dev
+  - libffi-dev
+  - liblzma-dev
+  - libncurses5-dev
+  - libncursesw5-dev
+  - libreadline-dev
+  - libsqlite3-dev
+  - libssl-dev
+  - llvm
+  - make
+  - tk-dev
+  - wget
+  - xz-utils
+  - zlib1g-dev
+- name: install pyenv
+  git: repo="https://github.com/pyenv/pyenv.git" dest="~/.pyenv" update="no" depth="1"
+- name: install pyenv plugins
+  git: repo="https://github.com/pyenv/{{ item }}.git" dest="~/.pyenv/plugins/{{ item }}" update="no" depth="1"
+  with_items:
+    - pyenv-doctor
+    - pyenv-installer
+    - pyenv-update
+    - pyenv-virtualenv
+    - pyenv-which-ext
+
+- name: install rbenv dependencies
+  package: name="{{ item }}" state="present"
+  when: "{{ ansible_distribution != 'MacOSX' }}"
+  become: true
+  with_items:
+    - autoconf
+    - bison
+    - build-essential
+    - git
+    - libffi-dev
+    - libgdbm-dev
+    - libgdm-dev
+    - libncurses5-dev
+    - libreadline6-dev
+    - libssl-dev
+    - libyaml-dev
+    - zlib1g-dev
+- name: install rbenv
+  git: repo="https://github.com/rbenv/rbenv.git" dest="~/.rbenv" update="no" depth="1"
+- name: make rbenv cache
+  file: path="~/.rbenv/cache" state="directory" mode="700"
+- name: install ruby-build
+  git: repo="https://github.com/rbenv/ruby-build.git" dest="~/.rbenv/plugins/ruby-build" update="no" depth="1"
+- name: link gemrc
+  file: src="{{ playbook_dir }}/roles/base/files/gemrc" dest="~/.gemrc" state="hard"

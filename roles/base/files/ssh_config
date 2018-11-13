@@ -1,0 +1,14 @@
+Host *
+  IdentityFile ~/.ssh/personal
+  StrictHostKeyChecking no
+  UserKnownHostsFile /dev/null
+
+Host stealy
+  Hostname 10.0.0.100
+  User alex
+
+Host work.github.com
+  HostName github.com
+  IdentitiesOnly yes
+  IdentityFile ~/.ssh/work
+  User git

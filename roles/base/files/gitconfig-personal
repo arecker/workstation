@@ -1,0 +1,6 @@
+[user]
+	name = Alex Recker
+	email = alex@reckerfamily.com
+	signingkey = alex@reckerfamily.com
+[commit]
+	gpgsign = true

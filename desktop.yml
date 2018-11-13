@@ -1,22 +1,4 @@
 ---
 - hosts: local
   roles:
-    # - tty
-    - bash
-    - dirs
-    - gpg
-    - ssh
-    - git
-    - repos
-    - pass
-    - emacs-config
-    - emacs-build
-    - emacs-daemon
-    - lisp
-    - python
-    - ruby
-    - aws
-    - pulseaudio
-    - xorg
-    - pia-gui
-    - mpd
+    - base

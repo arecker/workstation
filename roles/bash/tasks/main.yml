@@ -1,4 +1,0 @@
-- name: copy bashrc
-  copy: src="files/bashrc.sh" dest="~/.bashrc" mode="755"
-  become: true
-  become_user: "{{ user }}"

@@ -1,16 +1,4 @@
 ---
 - hosts: local
   roles:
-    - tty
-    - bash
-    - dirs
-    - gpg
-    - ssh
-    - git
-    - repos
-    - pass
-    - emacs-config
-    - lisp
-    - python
-    - ruby
-    - aws
+    - base
