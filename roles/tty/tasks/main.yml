@@ -1,3 +1,0 @@
-- name: copy keyboard config
-  become: true
-  copy: src="files/keyboard.env" dest="/etc/default/keyboard" mode="644"

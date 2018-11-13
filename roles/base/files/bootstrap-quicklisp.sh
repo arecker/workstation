@@ -1,15 +1,10 @@
 #!/usr/bin/env bash
-# sbcl-bootstrap.sh
+# bootstrap-quicklisp.sh
 set -e
 
 log() {
-    echo "sbcl-bootstrap.sh: $1"
+    echo "bootstrap-quicklisp.sh: $1"
 }
-
-if [ -d "$HOME/.quicklisp" ]; then
-    log "already bootstrapped, nothing to do."
-    exit 1
-fi
 
 log "downloading quicklisp library"
 curl -s -o /tmp/quicklisp.lisp https://beta.quicklisp.org/quicklisp.lisp

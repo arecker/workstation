@@ -2,3 +2,31 @@
 - hosts: local
   roles:
     - base
+
+  tasks:
+    - name: install packages
+      package: name="{{ item }}" state="present"
+      become: true
+      with_items:
+        - fonts-inconsolata
+        - network-manager
+        - network-manager-gnome
+        - network-manager-openvpn
+        - network-manager-openvpn-gnome
+        - pavucontrol
+        - pulseaudio
+        - xorg
+        - xscreensaver
+        - xscreensaver-data
+        - xscreensaver-data-extra
+        - xscreensaver-gl
+        - xscreensaver-gl-extra
+        - zip
+
+    - name: fix network manager config
+      lineinfile: name="/etc/NetworkManager/NetworkManager.conf" regexp="^managed" line="managed=true"
+      become: true
+
+    - name: fix default keyboard
+      lineinffile: name="/etc/default/keyboard" regexp="^XKBOPTIONS" line="XKBOPTIONS=\"ctrl:nocaps\""
+      become: true

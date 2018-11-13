@@ -1,3 +1,6 @@
+- name: link ansible config
+  file: src="{{ playbook_dir }}/roles/base/files/ansible.cfg" dest="~/.ansible.cfg" state="hard"
+
 - name: make bin directory
   file: path="~/bin" state="directory" mode="700"
 - name: link bashrc
@@ -46,7 +49,7 @@
   git: repo="git@gitlab.com:arecker/reckerops.git" dest="~/src/reckerops" accept_hostkey="yes" key_file="~/.ssh/personal" update="no"
 
 - name: link aws-personal
-  file: src="{{ playbook_dir }}/roles/base/files/aws-personal.sh" dest="~/bin/aws-personal" state="hard"
+  file: src="{{ playbook_dir }}/roles/base/files/aws-personal.sh" dest="~/bin/aws-personal.sh" state="hard"
 
 - name: install pyenv dependencies
   package: name="{{ item }}" state="present"
@@ -106,3 +109,13 @@
   git: repo="https://github.com/rbenv/ruby-build.git" dest="~/.rbenv/plugins/ruby-build" update="no" depth="1"
 - name: link gemrc
   file: src="{{ playbook_dir }}/roles/base/files/gemrc" dest="~/.gemrc" state="hard"
+
+- name: install sbcl
+  package: name="sbcl" state="present"
+  become: "{{ ansible_distribution != 'MacOSX' }}"
+- name: bootstrap quicklisp
+  command: "{{ playbook_dir }}/roles/base/files/bootstrap-quicklisp.sh"
+  args:
+    creates: ~/.quicklisp
+- name: link sbcl config
+  file: src="{{ playbook_dir }}/roles/base/files/sbclrc.lisp" dest="~/.sbclrc" state="hard"
