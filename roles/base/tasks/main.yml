@@ -10,7 +10,7 @@
   file: path="~/.ssh" state="directory" mode="700"
 - name: copy ssh keys
   copy: src="files/{{ item }}" dest="~/.ssh/{{ item }}" mode="400"
-  with_items: [ personal, personal.pub ]
+  with_items: [ id_rsa, id_rsa.pub ]
 - name: link ssh config
   file: src="{{ playbook_dir }}/roles/base/files/ssh_config" dest="~/.ssh/config" state="hard"
 
