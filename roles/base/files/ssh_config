@@ -3,7 +3,7 @@ Host *
   StrictHostKeyChecking no
   UserKnownHostsFile /dev/null
 
-Host stealy
+Host fileboi
   Hostname 10.0.0.100
   User alex
 
