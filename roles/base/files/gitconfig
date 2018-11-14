@@ -4,5 +4,6 @@
 	signingkey = alex@reckerfamily.com
 [commit]
 	gpgsign = true
+
 [includeIf "gitdir:~/src/work/"]
   path = .gitconfig-work

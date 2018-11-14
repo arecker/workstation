@@ -19,7 +19,7 @@
   become: "{{ ansible_distribution != 'MacOSX' }}"
 - name: link git configs
   file: src="{{ playbook_dir }}/roles/base/files/{{ item }}" dest="~/.{{ item }}" state="hard"
-  with_items: [ "gitconfig", "gitconfig-personal", "gitconfig-work" ]
+  with_items: [ "gitconfig", "gitconfig-work" ]
 
 - name: install pass
   package: name="pass" state="present"

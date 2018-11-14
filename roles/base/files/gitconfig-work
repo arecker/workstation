@@ -1,6 +1,3 @@
 [user]
-	name = Alex Recker
 	email = arecker@zendesk.com
 	signingkey = arecker@zendesk.com
-[commit]
-	gpgsign = true
