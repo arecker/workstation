@@ -26,7 +26,7 @@ aliens and someone needs to take over my life for a while.
 4. Import the gpg keys.
 
    #+BEGIN_SRC sh
-     gpg --import *.gpg.asc
+     gpg --import gpg/*.gpg.asc
    #+END_SRC
 
    (don't forget to later grant the key ultimate trust so gpg doesn't
