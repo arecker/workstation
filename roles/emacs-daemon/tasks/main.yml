@@ -1,8 +1,0 @@
-- block:
-    - name: create user systemd directory
-      file: path="~/.config/systemd/user/" state="directory"
-    - name: render emacs.service
-      template: src="templates/emacs.service.j2" dest="~/.config/systemd/user/emacs.service"
-      notify: [ reload emacs service ]
-  become: true
-  become_user: "{{ user }}"
