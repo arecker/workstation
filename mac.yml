@@ -3,6 +3,7 @@
 
   vars:
     bashrc_file: ~/.profile
+    can_sudo: false
     work_files_path: ~/src/work/devops/arecker/workstation
 
   roles:

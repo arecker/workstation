@@ -16,14 +16,14 @@
 
 - name: install git
   package: name="git" state="present"
-  become: "{{ ansible_distribution != 'MacOSX' }}"
+  become: "{{ can_sudo }}"
 - name: link git configs
   file: src="{{ playbook_dir }}/roles/base/files/{{ item }}" dest="~/.{{ item }}" state="hard"
   with_items: [ "gitconfig", "gitconfig-work" ]
 
 - name: install pass
   package: name="pass" state="present"
-  become: "{{ ansible_distribution != 'MacOSX' }}"
+  become: "{{ can_sudo }}"
 - name: clone password store
   git: repo="ssh://git@gitlab.com/arecker/password-store" dest="~/.password-store" accept_hostkey="yes" key_file="~/.ssh/personal" update="no"
 
@@ -112,7 +112,7 @@
 
 - name: install sbcl
   package: name="sbcl" state="present"
-  become: "{{ ansible_distribution != 'MacOSX' }}"
+  become: "{{ can_sudo }}"
 - name: bootstrap quicklisp
   command: "{{ playbook_dir }}/roles/base/files/bootstrap-quicklisp.sh"
   args:

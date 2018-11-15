@@ -1,1 +1,2 @@
 bashrc_file: ~/.bashrc
+can_sudo: true
