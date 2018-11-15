@@ -42,9 +42,25 @@
       package: name="i3" state="present"
       become: true
 
+    - name: install inconsolata
+      package: name="fonts-inconsolata" state="present"
+      become: true
+
     - name: motd
       copy: src="files/motd" dest="/etc/motd"
       become: true
 
     - name: dirs
       copy: src="files/user-dirs.dirs" dest="~/.config/user-dirs.dirs"
+
+    - name: install random packages
+      package: name="{{ item }}" state="present"
+      become: true
+      with_items:
+        - nitrogen
+        - xscreensaver
+        - xscreensaver-data
+        - xscreensaver-data-extra
+        - xscreensaver-gl
+        - xscreensaver-gl-extra
+        - xscreensaver-screensaver-bsod
