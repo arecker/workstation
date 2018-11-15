@@ -17,7 +17,7 @@ build() {
     git checkout "$1"
     log "building $1"
     ./autogen.sh
-    ./configure --prefix="$HOME/.local/" -with-x-toolkit --with-xft
+    ./configure --prefix="$HOME/.local/" --bindir=$HOME/bin -with-x-toolkit --with-xft
     make bootstrap
     log "installing $1"
     make install
