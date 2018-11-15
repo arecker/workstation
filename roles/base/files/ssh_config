@@ -5,7 +5,6 @@ Host *
   IdentityFile ~/.ssh/id_rsa
   StrictHostKeyChecking no
   User alex
-  UserKnownHostsFile /dev/null
 
 Host fileboi
   Hostname 10.0.0.100
