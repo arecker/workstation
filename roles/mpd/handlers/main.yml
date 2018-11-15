@@ -1,4 +1,0 @@
-- name: reload mpd
-  systemd: name="mpd" state="restarted" user="True"
-  become: True
-  become_user: "{{ user }}"
