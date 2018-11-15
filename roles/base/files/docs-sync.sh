@@ -16,7 +16,7 @@ log "comitting changes"
 git add -A && git commit -m "docs-sync.sh: $(date)" > /dev/null
 
 log "rebasing"
-git rebase origin/master > /dev/null
+git rebase -Xours origin/master > /dev/null
 
 log "pushing"
 git push origin master --quiet > /dev/null
