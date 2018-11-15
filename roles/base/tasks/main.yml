@@ -1,10 +1,10 @@
 - name: link ansible config
-  file: src="{{ playbook_dir }}/roles/base/files/ansible.cfg" dest="~/.ansible.cfg" state="hard"
+  file: src="{{ playbook_dir }}/roles/base/files/ansible.cfg" dest="~/.ansible.cfg" state="hard" force="yes"
 
 - name: make bin directory
   file: path="~/bin" state="directory" mode="700"
 - name: link bashrc
-  file: src="{{ playbook_dir }}/roles/base/files/bashrc.sh" dest="{{ bashrc_file }}" state="hard"
+  file: src="{{ playbook_dir }}/roles/base/files/bashrc.sh" dest="{{ bashrc_file }}" state="hard" force="yes"
 
 - name: make ssh directory
   file: path="~/.ssh" state="directory" mode="700"
@@ -12,13 +12,13 @@
   copy: src="files/{{ item }}" dest="~/.ssh/{{ item }}" mode="400"
   with_items: [ id_rsa, id_rsa.pub ]
 - name: link ssh config
-  file: src="{{ playbook_dir }}/roles/base/files/ssh_config" dest="~/.ssh/config" state="hard"
+  file: src="{{ playbook_dir }}/roles/base/files/ssh_config" dest="~/.ssh/config" state="hard" force="yes"
 
 - name: install git
   package: name="git" state="present"
   become: "{{ can_sudo }}"
 - name: link git configs
-  file: src="{{ playbook_dir }}/roles/base/files/{{ item }}" dest="~/.{{ item }}" state="hard"
+  file: src="{{ playbook_dir }}/roles/base/files/{{ item }}" dest="~/.{{ item }}" state="hard" force="yes"
   with_items: [ "gitconfig", "gitconfig-work" ]
 
 - name: install pass
@@ -33,7 +33,7 @@
 - name: clone docs
   git: repo="git@gitlab.com:arecker/docs.git" dest="~/docs" accept_hostkey="yes" key_file="~/.ssh/personal" update="no"
 - name: link docs-sync.sh
-  file: src="{{ playbook_dir }}/roles/base/files/docs-sync.sh" dest="~/bin/docs-sync.sh" state="hard"
+  file: src="{{ playbook_dir }}/roles/base/files/docs-sync.sh" dest="~/bin/docs-sync.sh" state="hard" force="yes"
 
 - name: create src directory
   file: path="~/src" state="directory"
@@ -41,7 +41,7 @@
 - name: clone blog
   git: repo="git@gitlab.com:arecker/blog.git" dest="~/src/blog" accept_hostkey="yes" key_file="~/.ssh/personal" update="no"
 - name: link blog-publish.sh
-  file: src="{{ playbook_dir }}/roles/base/files/blog-publish.sh" dest="~/bin/blog-publish.sh" state="hard"
+  file: src="{{ playbook_dir }}/roles/base/files/blog-publish.sh" dest="~/bin/blog-publish.sh" state="hard" force="yes"
 - name: create public directory
   file: path="~/public" state="directory"
 
@@ -49,7 +49,7 @@
   git: repo="git@gitlab.com:arecker/reckerops.git" dest="~/src/reckerops" accept_hostkey="yes" key_file="~/.ssh/personal" update="no"
 
 - name: link aws-personal
-  file: src="{{ playbook_dir }}/roles/base/files/aws-personal.sh" dest="~/bin/aws-personal.sh" state="hard"
+  file: src="{{ playbook_dir }}/roles/base/files/aws-personal.sh" dest="~/bin/aws-personal.sh" state="hard" force="yes"
 
 - name: install pyenv dependencies
   package: name="{{ item }}" state="present"
@@ -108,7 +108,7 @@
 - name: install ruby-build
   git: repo="https://github.com/rbenv/ruby-build.git" dest="~/.rbenv/plugins/ruby-build" update="no" depth="1"
 - name: link gemrc
-  file: src="{{ playbook_dir }}/roles/base/files/gemrc" dest="~/.gemrc" state="hard"
+  file: src="{{ playbook_dir }}/roles/base/files/gemrc" dest="~/.gemrc" state="hard" force="yes"
 
 - name: install sbcl
   package: name="sbcl" state="present"
@@ -118,7 +118,7 @@
   args:
     creates: ~/.quicklisp
 - name: link sbcl config
-  file: src="{{ playbook_dir }}/roles/base/files/sbclrc.lisp" dest="~/.sbclrc" state="hard"
+  file: src="{{ playbook_dir }}/roles/base/files/sbclrc.lisp" dest="~/.sbclrc" state="hard" force="yes"
 
 - name: link emacs-build.sh
-  file: src="{{ playbook_dir }}/roles/base/files/emacs-build.sh" dest="~/bin/emacs-build.sh" state="hard"
+  file: src="{{ playbook_dir }}/roles/base/files/emacs-build.sh" dest="~/bin/emacs-build.sh" state="hard" force="yes"
