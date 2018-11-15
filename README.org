@@ -35,7 +35,7 @@ aliens and someone needs to take over my life for a while.
 5. And lastly, run ansible.
 
    #+BEGIN_SRC sh
-     ansible-playbook --vault-password-file ~/.ansible-password -i hosts pi.yml
+     ansible-playbook --ask-sudo-pass --vault-password-file ~/.ansible-password -i hosts pi.yml
    #+END_SRC
 
    Once the script succeeds, you should be ready to take over my life.
