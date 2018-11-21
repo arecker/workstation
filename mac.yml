@@ -35,6 +35,7 @@
         - cowsay
         - gcc
         - git
+        - gnuplot
         - htop
         - ispell
         - jq
