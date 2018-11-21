@@ -4,6 +4,7 @@ export PS1="\u@\h:\w\$ "
 
 # aliases
 alias be="bundle exec"
+alias aws-whoami="aws sts get-caller-identity"
 if [ "$(uname)" != "Darwin" ]; then
     alias ls="ls --color"
 fi
