@@ -125,3 +125,7 @@
 
 - name: link emacs-build.sh
   file: src="{{ playbook_dir }}/roles/base/files/emacs-build.sh" dest="~/bin/emacs-build.sh" state="hard" force="yes"
+
+- name: install gnuplot
+  package: name="gnuplot" state="present"
+  become: "{{ can_sudo }}"
