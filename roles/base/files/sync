@@ -1,0 +1,21 @@
+#!/usr/bin/sbcl --script
+
+(defparameter *paths* '("~/docs"))
+
+(defun l (message &rest args)
+  (apply #'format *error-output* (concatenate 'string "sync: " message "~%") args))
+
+(defun command (cmd)
+  (let ((stdout (make-string-output-stream))
+	(stderr (make-string-output-stream)))
+    (uiop:run-program cmd :output stdout :error stdout)
+    (list (get-output-stream-string stdout)
+	  (get-output-stream-string stderr))))
+
+(defun sync (path)
+  (let ((path (namestring
+	       (merge-pathnames (user-homedir-pathname) path))))
+    (l "synchronizing ~s" path)))
+
+(dolist (path *paths*)
+  (sync path))

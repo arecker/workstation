@@ -8,5 +8,5 @@
       apt_repository: repo="ppa:kelleyk/emacs"
       become: true
     - name: install package
-      package: name="emacs" state="present"
+      package: name="emacs26" state="present"
       become: true

@@ -12,6 +12,7 @@ fi
 # pyenv
 if [ -d "$HOME/.pyenv" ]; then
   export PATH="$HOME/.pyenv/bin:$PATH"
+  export WORKON_HOME="~/.virtualenvs"
   eval "$(pyenv init -)"
   eval "$(pyenv virtualenv-init -)"
 fi
