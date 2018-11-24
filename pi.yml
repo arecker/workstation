@@ -87,3 +87,7 @@
 
     - name: link xresources
       file: src="{{ playbook_dir }}/files/xresources" dest="~/.Xresources" state="hard" force="yes"
+
+    - name: install java, sure
+      package: name="openjdk-9-jre-headless" state="present"
+      become: true
