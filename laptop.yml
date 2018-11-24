@@ -10,3 +10,6 @@
     - name: install package
       package: name="emacs26" state="present"
       become: true
+    - name: install java, sure
+      package: name="default-jre" state="present"
+      become: true
