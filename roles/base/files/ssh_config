@@ -6,7 +6,7 @@ Host *
   StrictHostKeyChecking no
 
 Host fileboi
-  Hostname 10.0.0.100
+  Hostname 192.168.1.116
 
 Host stealy
   Hostname 10.0.0.101
