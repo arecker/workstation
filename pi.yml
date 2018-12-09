@@ -34,32 +34,6 @@
         - libgnutls28-dev
         - libxml2-dev
 
-    - name: install xorg
-      package: name="xorg" state="present"
-      become: true
-
-    - name: install i3-gaps dependencies
-      package: name="{{ item }}" state="present"
-      become: true
-      with_items:
-        - libxcb-keysyms1-dev
-        - libpango1.0-dev
-        - libxcb-util0-dev
-        - xcb
-        - libxcb1-dev
-        - libxcb-icccm4-dev
-        - libyajl-dev
-        - libev-dev
-        - libxcb-xkb-dev
-        - libxcb-cursor-dev
-        - libxkbcommon-dev
-        - libxcb-xinerama0-dev
-        - libxkbcommon-x11-dev
-        - libstartup-notification0-dev
-        - libxcb-randr0-dev
-        - libxcb-xrm0
-        - libxcb-xrm-dev
-
     - name: install inconsolata
       package: name="fonts-inconsolata" state="present"
       become: true
@@ -71,7 +45,7 @@
     - name: dirs
       copy: src="files/user-dirs.dirs" dest="~/.config/user-dirs.dirs"
 
-    - name: install random packages
+    - name: screensaver
       package: name="{{ item }}" state="present"
       become: true
       with_items:
@@ -81,12 +55,6 @@
         - xscreensaver-gl
         - xscreensaver-gl-extra
         - xscreensaver-screensaver-bsod
-
-    - name: link xinitrc
-      file: src="{{ playbook_dir }}/files/xinitrc" dest="~/.xinitrc" state="hard" force="yes"
-
-    - name: link xresources
-      file: src="{{ playbook_dir }}/files/xresources" dest="~/.Xresources" state="hard" force="yes"
 
     - name: install java, sure
       package: name="openjdk-9-jre-headless" state="present"
