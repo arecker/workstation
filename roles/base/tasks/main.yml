@@ -35,9 +35,6 @@
 - name: link docs-sync.sh
   file: src="{{ playbook_dir }}/roles/base/files/docs-sync.sh" dest="~/bin/docs-sync.sh" state="hard" force="yes"
 
-- name: link sync
-  file: src="{{ playbook_dir }}/roles/base/files/sync" dest="~/bin/sync" state="hard" force="yes"
-
 - name: create src directory
   file: path="~/src" state="directory"
 
