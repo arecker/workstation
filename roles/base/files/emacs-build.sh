@@ -19,9 +19,8 @@ build() {
     ./autogen.sh
     ./configure --prefix="$HOME/.local/" \
 		--bindir=$HOME/bin \
-		-with-x-toolkit \
-		--with-xft \
-		--with-xwidgets
+		--with-x-toolkit \
+		--with-xft
     make bootstrap
     log "installing $1"
     make install

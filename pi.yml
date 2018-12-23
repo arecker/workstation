@@ -60,5 +60,9 @@
       package: name="openjdk-9-jre-headless" state="present"
       become: true
 
-    - name: clone pico8 carts
+    - name: clone pico-8 carts
       git: repo="git@github.com:arecker/pico8.git" dest="~/.lexaloffle/pico-8/carts/src" update="no"
+
+    - name: copy pico-8 desktop file
+      copy: src="files/pico-8.desktop" dest="/usr/share/applications/pico-8.desktop"
+      become: true
