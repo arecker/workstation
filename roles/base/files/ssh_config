@@ -1,6 +1,7 @@
 Include work/config
 
 Host *
+  User alex
   ForwardAgent yes
   IdentityFile ~/.ssh/id_rsa
   StrictHostKeyChecking no
@@ -8,5 +9,5 @@ Host *
 Host fileboi
   Hostname 192.168.1.116
 
-Host stealy
-  Hostname 10.0.0.101
+Host secretboi
+  Hostname 192.168.1.100
