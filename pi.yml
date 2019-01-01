@@ -66,3 +66,11 @@
     - name: copy pico-8 desktop file
       copy: src="files/pico-8.desktop" dest="/usr/share/applications/pico-8.desktop"
       become: true
+
+    - name: install editing stuff
+      package: name="{{ item }}" state="present"
+      become: true
+      with_items:
+        - blender
+        - gimp
+        - openshot
