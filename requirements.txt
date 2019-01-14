@@ -1,0 +1,10 @@
+autopep8
+awscli
+boto3
+flake8
+importmagic
+ipdb
+ipython
+jedi
+pipenv
+virtualenv

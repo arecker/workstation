@@ -39,3 +39,35 @@ aliens and someone needs to take over my life for a while.
    #+END_SRC
 
    Once the script succeeds, you should be ready to take over my life.
+
+** Further Setup
+
+*** Python
+
+Install the latest version of python.
+
+#+BEGIN_SRC sh
+  pyenv install 3.7.1
+  pyenv global 3.7.1
+#+END_SRC
+
+Install some fun development packages.
+
+#+BEGIN_SRC sh
+pip install -r requirements.txt
+#+END_SRC
+
+*** Ruby
+
+Install the latest version of ruby.
+
+#+BEGIN_SRC sh
+  rbenv install 2.6.0
+  rbenv global 2.6.0
+#+END_SRC
+
+Install bundler.
+
+#+BEGIN_SRC sh
+  gem install bundler
+#+END_SRC
