@@ -4,6 +4,7 @@
   vars:
     bashrc_file: ~/.profile
     can_sudo: false
+    pics_dir: ~/Pictures
     work_files_path: ~/src/work/devops/arecker/workstation
 
   roles:

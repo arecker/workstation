@@ -1,2 +1,3 @@
+pics_dir: ~/pics
 bashrc_file: ~/.bashrc
 can_sudo: true
