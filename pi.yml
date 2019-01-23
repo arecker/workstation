@@ -72,5 +72,7 @@
       become: true
       with_items:
         - blender
+        - exfat-fuse
+        - exfat-utils
         - gimp
         - openshot
