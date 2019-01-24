@@ -1,7 +1,6 @@
 Include work/config
 
 Host *
-  User alex
   ForwardAgent yes
   IdentityFile ~/.ssh/id_rsa
   StrictHostKeyChecking no
