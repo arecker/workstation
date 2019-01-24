@@ -11,3 +11,6 @@ Host fileboi
 
 Host secretboi
   Hostname 192.168.1.100
+
+Host routerboi
+  Hostname 192.168.1.142
