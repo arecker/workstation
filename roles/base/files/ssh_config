@@ -4,12 +4,3 @@ Host *
   ForwardAgent yes
   IdentityFile ~/.ssh/id_rsa
   StrictHostKeyChecking no
-
-Host fileboi
-  Hostname 192.168.1.116
-
-Host secretboi
-  Hostname 192.168.1.100
-
-Host routerboi
-  Hostname 192.168.1.142
