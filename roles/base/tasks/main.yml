@@ -41,7 +41,7 @@
 - name: create pics directory
   file: path="{{ pics_dir }}" state="directory"
 - name: clone wallpapers
-  git: repo="git@gitlab.com:arecker/wallpapers.git" dest="{{ pics_dir }}/wallpapers" accept_hostkey="yes" key_file="~/.ssh/id_rsa" update="no"
+  git: repo="git@github.com:arecker/wallpapers.git" dest="{{ pics_dir }}/wallpapers" accept_hostkey="yes" key_file="~/.ssh/id_rsa" update="no"
 
 - name: clone blog
   git: repo="git@gitlab.com:arecker/blog.git" dest="~/src/blog" accept_hostkey="yes" key_file="~/.ssh/id_rsa" update="no"

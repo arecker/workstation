@@ -16,7 +16,7 @@
     - name: copy public ssh key
       copy: src="{{ work_files_path }}/id_rsa.pub" dest="~/.ssh/work/id_rsa.pub" mode="744"
     - name: link ssh config
-      file: src="{{ work_files_path }}/ssh_config" dest="~/.ssh/work/config" state="hard"
+      file: src="{{ work_files_path }}/ssh_config" dest="~/.ssh/work/config" state="hard" force="yes"
     - name: read in repos to clone
       include_vars: file="{{ work_files_path }}/vars.yml" name="work_vars"
     - name: hard link local.el
