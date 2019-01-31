@@ -13,3 +13,8 @@
     - name: install java, sure
       package: name="default-jre" state="present"
       become: true
+    - name: android
+      package: name="{{ item }}" state="present"
+      become: true
+      with_items:
+        - mtp-tools

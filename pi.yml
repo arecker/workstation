@@ -76,3 +76,9 @@
         - exfat-utils
         - gimp
         - openshot
+
+    - name: android
+      package: name="{{ item }}" state="present"
+      become: true
+      with_items:
+        - mtp-tools
