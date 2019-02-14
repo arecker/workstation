@@ -53,6 +53,9 @@
 - name: clone reckerops
   git: repo="git@gitlab.com:arecker/reckerops.git" dest="~/src/reckerops" accept_hostkey="yes" key_file="~/.ssh/id_rsa" update="no"
 
+- name: clone terraform
+  git: repo="git@github.com:arecker/terraform.git" dest="~/src/terraform" accept_hostkey="yes" key_file="~/.ssh/id_rsa" update="no"
+
 - name: clone lisp room
   git: repo="git@github.com:arecker/lisproom.git" dest="~/src/lisproom" accept_hostkey="yes" key_file="~/.ssh/id_rsa" update="no"
 
