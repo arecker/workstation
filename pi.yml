@@ -56,9 +56,9 @@
         - xscreensaver-gl-extra
         - xscreensaver-screensaver-bsod
 
-    - name: install java, sure
-      package: name="openjdk-9-jre-headless" state="present"
-      become: true
+#    - name: install java, sure
+#      package: name="openjdk-9-jre-headless" state="present"
+#      become: true
 
     - name: clone pico-8 carts
       git: repo="git@github.com:arecker/pico8.git" dest="~/.lexaloffle/pico-8/carts/src" update="no"
