@@ -30,11 +30,6 @@
 - name: clone emacs config
   git: repo="ssh://git@github.com/arecker/emacs.d" dest="~/.emacs.d" accept_hostkey="yes" key_file="~/.ssh/id_rsa" update="no"
 
-- name: clone docs
-  git: repo="git@gitlab.com:arecker/docs.git" dest="~/docs" accept_hostkey="yes" key_file="~/.ssh/id_rsa" update="no"
-- name: link docs-sync.sh
-  file: src="{{ playbook_dir }}/roles/base/files/docs-sync.sh" dest="~/bin/docs-sync.sh" state="hard" force="yes"
-
 - name: create src directory
   file: path="~/src" state="directory"
 
