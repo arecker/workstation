@@ -7,36 +7,36 @@ aliens and someone needs to take over my life for a while.
 
 1. Install ansible.  It is probably available in your distribution.
 
-   #+BEGIN_SRC sh
-     sudo apt-get install ansible
-   #+END_SRC
+#+BEGIN_SRC sh
+sudo apt-get install ansible
+#+END_SRC
 
 2. Type out the ansible vault password and save to somewhere.
 
-   #+BEGIN_SRC sh
-     echo "bigGnarlyEvilmulticharacteransibleVaultpassword" > ~/.ansible-password.txt
-   #+END_SRC
+#+BEGIN_SRC sh
+echo "bigGnarlyEvilmulticharacteransibleVaultpassword" > ~/.ansible-password.txt
+#+END_SRC
 
 3. Decrypt the private gpg key in this repo.
 
-   #+BEGIN_SRC sh
-     ansible-vault decrypt --vault-password-file ~/.ansible-password.txt private.gpg.asc
-   #+END_SRC
+#+BEGIN_SRC sh
+ansible-vault decrypt --vault-password-file ~/.ansible-password.txt private.gpg.asc
+#+END_SRC
 
 4. Import the gpg keys.
 
-   #+BEGIN_SRC sh
-     gpg --import gpg/*.gpg.asc
-   #+END_SRC
+#+BEGIN_SRC sh
+gpg --import gpg/*.gpg.asc
+#+END_SRC
 
    (don't forget to later grant the key ultimate trust so gpg doesn't
    bother you about it when you try to sign or encrypt something)
 
 5. And lastly, run ansible.
 
-   #+BEGIN_SRC sh
-     ansible-playbook --ask-sudo-pass --vault-password-file ~/.ansible-password -i hosts pi.yml
-   #+END_SRC
+#+BEGIN_SRC sh
+ansible-playbook --ask-sudo-pass --vault-password-file ~/.ansible-password -i hosts pi.yml
+#+END_SRC
 
    Once the script succeeds, you should be ready to take over my life.
 
@@ -47,8 +47,8 @@ aliens and someone needs to take over my life for a while.
 Install the latest version of python.
 
 #+BEGIN_SRC sh
-  pyenv install 3.7.1
-  pyenv global 3.7.1
+pyenv install 3.7.1
+pyenv global 3.7.1
 #+END_SRC
 
 Install some fun development packages.
@@ -62,12 +62,12 @@ pip install -r requirements.txt
 Install the latest version of ruby.
 
 #+BEGIN_SRC sh
-  rbenv install 2.6.0
-  rbenv global 2.6.0
+rbenv install 2.6.0
+rbenv global 2.6.0
 #+END_SRC
 
 Install bundler.
 
 #+BEGIN_SRC sh
-  gem install bundler
+gem install bundler
 #+END_SRC
