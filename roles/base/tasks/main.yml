@@ -133,3 +133,11 @@
 - name: install gnuplot
   package: name="gnuplot" state="present"
   become: "{{ can_sudo }}"
+
+- name: install mpd
+  package: name="mpd" state="present"
+  become: "{{ can_sudo }}"
+- name: make mpd directories
+  file: path="~/.mpd" state="directory" mode="700"
+- name: link mpd config
+  file: src="{{ playbook_dir }}/roles/base/files/mpd.{{ ansible_distribution }}.conf" dest="~/.mpd/mpd.conf" state="hard" force="yes"
