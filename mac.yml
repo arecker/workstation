@@ -53,6 +53,6 @@
         - youtube-dl
         - zsh
     - name: hard link scripts
-      file: src="{{ item }}" dest="~/bin/" state="hard"
+      file: src="{{ item }}" dest="~/bin/" state="hard" force="yes"
       with_fileglob:
         - "{{ work_files_path }}/scripts/*.sh"
