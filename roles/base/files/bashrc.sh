@@ -23,6 +23,11 @@ if [ -d "$HOME/.rbenv" ]; then
   eval "$(rbenv init -)"
 fi
 
+# nvm
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
+
 # ssh
 ssh-add -k ~/.ssh/personal 2>/dev/null
 if [ -f "$HOME/.ssh/work/id_rsa" ]; then
