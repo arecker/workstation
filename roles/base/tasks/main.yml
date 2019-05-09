@@ -133,3 +133,12 @@
 - name: install gnuplot
   package: name="gnuplot" state="present"
   become: "{{ can_sudo }}"
+
+- name: install nodenv
+  git: repo="https://github.com/nodenv/nodenv.git" dest="~/.nodenv" update="no" depth="1"
+- name: make nodenv plugins directory
+  file: path="~/.nodenv/plugins" state="directory" mode="751"
+- name: install nodenv plugins
+  git: repo="https://github.com/nodenv/{{ item }}.git" dest="~/.nodenv/plugins/{{ item }}" update="no" depth="1"
+  with_items:
+    - node-build
