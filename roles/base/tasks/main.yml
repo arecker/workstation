@@ -55,8 +55,8 @@
 - name: link aws-personal
   file: src="{{ playbook_dir }}/roles/base/files/aws-personal.sh" dest="~/bin/aws-personal.sh" state="hard" force="yes"
 
-- name: link vid-to-mp3.sh
-  file: src="{{ playbook_dir }}/roles/base/files/vid-to-mp3.sh" dest="~/bin/vid-to-mp3.sh" state="hard" force="yes"
+- name: link git-commit-sync
+  file: src="{{ playbook_dir }}/roles/base/files/git-sync" dest="~/bin/git-sync" state="hard" force="yes"
 
 - name: install pyenv dependencies
   package: name="{{ item }}" state="present"

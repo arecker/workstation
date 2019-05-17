@@ -11,7 +11,7 @@ def get_logger(verbose=False):
         level = logging.DEBUG
     else:
         level = logging.INFO
-    
+
     logger = logging.getLogger('git-sync')
     logger.setLevel(level)
     handler = logging.StreamHandler(sys.stdout)
