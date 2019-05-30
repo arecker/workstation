@@ -46,7 +46,6 @@
         - nmap
         - packer
         - sqlite
-        - terraform
         - tree
         - vault
         - vim

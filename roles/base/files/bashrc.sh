@@ -29,6 +29,11 @@ if [ -d "$HOME/.nodenv" ]; then
   eval "$(nodenv init -)"
 fi
 
+# tfenv
+if [ -d "$HOME/.tfenv/bin" ]; then
+  export PATH="$HOME/.tfenv/bin:$PATH"
+fi
+
 # ssh
 ssh-add -k ~/.ssh/personal 2>/dev/null
 if [ -f "$HOME/.ssh/work/id_rsa" ]; then

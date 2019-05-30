@@ -142,3 +142,6 @@
   git: repo="https://github.com/nodenv/{{ item }}.git" dest="~/.nodenv/plugins/{{ item }}" update="no" depth="1"
   with_items:
     - node-build
+
+- name: install tfenv
+  git: repo="https://github.com/tfutils/tfenv.git" dest="~/.tfenv" update="no" depth="1"
