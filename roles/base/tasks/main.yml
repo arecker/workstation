@@ -26,8 +26,6 @@
   become: "{{ can_sudo }}"
 - name: clone password store
   git: repo="ssh://git@gitlab.com/arecker/password-store" dest="~/.password-store" accept_hostkey="yes" key_file="~/.ssh/id_rsa" update="no"
-- name: clone work password store
-  git: repo="ssh://git@github.com:arecker/password-store-work.git" dest="~/.password-store-work" accept_hostkey="yes" key_file="~/.ssh/id_rsa" update="no"
 
 - name: clone emacs config
   git: repo="ssh://git@github.com/arecker/emacs.d" dest="~/.emacs.d" accept_hostkey="yes" key_file="~/.ssh/id_rsa" update="no"
