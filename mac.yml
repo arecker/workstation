@@ -25,7 +25,7 @@
     - name: hard link local.el
       file: src="{{ work_files_path }}/local.el" dest="~/.emacs.d/local.el" state="hard" force="yes"
     - name: clone work repos
-      git: repo="git@github.com:zendesk/{{ item }}.git" dest="~/src/work/{{ item }}" update="no" accept_hostkey="yes" key_file="~/.ssh/work/id_rsa"
+      git: repo="github-zendesk:zendesk/{{ item }}.git" dest="~/src/work/{{ item }}" update="no" accept_hostkey="yes" key_file="~/.ssh/work/id_rsa"
       with_items: "{{ work_vars.repos }}"
     - name: install some packages
       package: name="{{ item }}" state="present"
