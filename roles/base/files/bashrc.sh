@@ -8,6 +8,7 @@ alias aws-whoami="aws sts get-caller-identity | jq -r '.Arn'"
 if [ "$(uname)" != "Darwin" ]; then
     alias ls="ls --color"
 else
+    alias knife='/opt/chefdk/bin/knife'
     alias quickkill='kill -9 $(pgrep -i "Quicktime")'
 fi
 

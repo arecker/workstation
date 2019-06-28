@@ -1,3 +1,4 @@
 pics_dir: ~/pics
+public_dir: ~/public
 bashrc_file: ~/.bashrc
 can_sudo: true
