@@ -29,6 +29,7 @@
 
 - name: clone emacs config
   git: repo="ssh://git@github.com/arecker/emacs.d" dest="~/.emacs.d" accept_hostkey="yes" key_file="~/.ssh/id_rsa" update="no"
+  when: "{{ emacs_from_src }}"
 
 - name: create src directory
   file: path="~/src" state="directory"
@@ -130,10 +131,6 @@
 - name: link emacs-build.sh
   file: src="{{ playbook_dir }}/roles/base/files/emacs-build.sh" dest="~/bin/emacs-build.sh" state="hard" force="yes"
 
-- name: install gnuplot
-  package: name="gnuplot" state="present"
-  become: "{{ can_sudo }}"
-
 - name: install nodenv
   git: repo="https://github.com/nodenv/nodenv.git" dest="~/.nodenv" update="no" depth="1"
 - name: make nodenv plugins directory
@@ -142,6 +139,3 @@
   git: repo="https://github.com/nodenv/{{ item }}.git" dest="~/.nodenv/plugins/{{ item }}" update="no" depth="1"
   with_items:
     - node-build
-
-- name: install tfenv
-  git: repo="https://github.com/tfutils/tfenv.git" dest="~/.tfenv" update="no" depth="1"
