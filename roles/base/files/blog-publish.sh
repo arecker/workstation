@@ -2,15 +2,7 @@
 
 set -e
 
-SITE_DIR="/home/alex/public/www.alexrecker.com"
-REGION_NAME="us-east-2"
-STACK_NAME="blog"
+DIR="$HOME/public/www.alexrecker.com"
+BUCKET="blog-bucket-1edd2xs506ohe"
 
-bucket_name() {
-    aws cloudformation \
-	describe-stacks --stack-name "$STACK_NAME" --region "$REGION_NAME" \
-	| jq -r '.Stacks[0].Outputs[]| select(.OutputKey == "Bucket").OutputValue'
-}
-
-aws s3 sync --delete "$SITE_DIR" "s3://$(bucket_name)"
-
+aws s3 sync --delete "$DIR/" "s3://$BUCKET/"
