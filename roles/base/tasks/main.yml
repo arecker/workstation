@@ -36,8 +36,6 @@
 
 - name: clone blog
   git: repo="git@github.com:arecker/blog.git" dest="~/src/blog" accept_hostkey="yes" key_file="~/.ssh/id_rsa" update="no"
-- name: link blog-publish.sh
-  file: src="{{ playbook_dir }}/roles/base/files/blog-publish.sh" dest="~/bin/blog-publish.sh" state="hard" force="yes"
 - name: clone public repository
   git: repo="git@github.com:arecker/public.git" dest="{{ public_dir }}" accept_hostkey="yes" key_file="~/.ssh/id_rsa" update="no"
 
@@ -52,12 +50,6 @@
 
 - name: clone network
   git: repo="git@github.com:arecker/network.git" dest="~/src/network" accept_hostkey="yes" key_file="~/.ssh/id_rsa" update="no"
-
-- name: link aws-personal
-  file: src="{{ playbook_dir }}/roles/base/files/aws-personal.sh" dest="~/bin/aws-personal.sh" state="hard" force="yes"
-
-- name: link git-commit-sync
-  file: src="{{ playbook_dir }}/roles/base/files/git-sync" dest="~/bin/git-sync" state="hard" force="yes"
 
 - name: install pyenv dependencies
   package: name="{{ item }}" state="present"
@@ -127,9 +119,6 @@
     creates: ~/.quicklisp
 - name: link sbcl config
   file: src="{{ playbook_dir }}/roles/base/files/sbclrc.lisp" dest="~/.sbclrc" state="hard" force="yes"
-
-- name: link emacs-build.sh
-  file: src="{{ playbook_dir }}/roles/base/files/emacs-build.sh" dest="~/bin/emacs-build.sh" state="hard" force="yes"
 
 - name: install nodenv
   git: repo="https://github.com/nodenv/nodenv.git" dest="~/.nodenv" update="no" depth="1"
