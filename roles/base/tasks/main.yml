@@ -1,55 +1,16 @@
-- name: link ansible config
-  file: src="{{ playbook_dir }}/roles/base/files/ansible.cfg" dest="~/.ansible.cfg" state="hard" force="yes"
-
-- name: make bin directory
-  file: path="~/bin" state="directory" mode="700"
-- name: link bashrc
-  file: src="{{ playbook_dir }}/roles/base/files/bashrc.sh" dest="{{ bashrc_file }}" state="hard" force="yes"
-
-- name: make ssh directory
-  file: path="~/.ssh" state="directory" mode="700"
 - name: copy ssh keys
   copy: src="files/{{ item }}" dest="~/.ssh/{{ item }}" mode="400"
   with_items: [ id_rsa, id_rsa.pub ]
-- name: link ssh config
-  file: src="{{ playbook_dir }}/roles/base/files/ssh_config" dest="~/.ssh/config" state="hard" force="yes"
 
 - name: install git
   package: name="git" state="present"
   become: "{{ can_sudo }}"
-- name: link git configs
-  file: src="{{ playbook_dir }}/roles/base/files/{{ item }}" dest="~/.{{ item }}" state="hard" force="yes"
-  with_items: [ "gitconfig", "gitconfig-work" ]
 
 - name: install pass
   package: name="pass" state="present"
   become: "{{ can_sudo }}"
 - name: clone password store
   git: repo="ssh://git@gitlab.com/arecker/password-store" dest="~/.password-store" accept_hostkey="yes" key_file="~/.ssh/id_rsa" update="no"
-
-- name: clone emacs config
-  git: repo="ssh://git@github.com/arecker/emacs.d" dest="~/.emacs.d" accept_hostkey="yes" key_file="~/.ssh/id_rsa" update="no"
-  when: "{{ emacs_from_src }}"
-
-- name: create src directory
-  file: path="~/src" state="directory"
-
-- name: clone blog
-  git: repo="git@github.com:arecker/blog.git" dest="~/src/blog" accept_hostkey="yes" key_file="~/.ssh/id_rsa" update="no"
-- name: clone public repository
-  git: repo="git@github.com:arecker/public.git" dest="{{ public_dir }}" accept_hostkey="yes" key_file="~/.ssh/id_rsa" update="no"
-
-- name: clone reckerops
-  git: repo="git@gitlab.com:arecker/reckerops.git" dest="~/src/reckerops" accept_hostkey="yes" key_file="~/.ssh/id_rsa" update="no"
-
-- name: clone infra
-  git: repo="git@github.com:arecker/infra.git" dest="~/src/infra" accept_hostkey="yes" key_file="~/.ssh/id_rsa" update="no"
-
-- name: clone lisp room
-  git: repo="git@github.com:arecker/lisproom.git" dest="~/src/lisproom" accept_hostkey="yes" key_file="~/.ssh/id_rsa" update="no"
-
-- name: clone network
-  git: repo="git@github.com:arecker/network.git" dest="~/src/network" accept_hostkey="yes" key_file="~/.ssh/id_rsa" update="no"
 
 - name: install pyenv dependencies
   package: name="{{ item }}" state="present"
@@ -73,16 +34,6 @@
   - wget
   - xz-utils
   - zlib1g-dev
-- name: install pyenv
-  git: repo="https://github.com/pyenv/pyenv.git" dest="~/.pyenv" update="no" depth="1"
-- name: install pyenv plugins
-  git: repo="https://github.com/pyenv/{{ item }}.git" dest="~/.pyenv/plugins/{{ item }}" update="no" depth="1"
-  with_items:
-    - pyenv-doctor
-    - pyenv-installer
-    - pyenv-update
-    - pyenv-virtualenv
-    - pyenv-which-ext
 
 - name: install rbenv dependencies
   package: name="{{ item }}" state="present"
@@ -103,12 +54,6 @@
     - zlib1g-dev
 - name: install rbenv
   git: repo="https://github.com/rbenv/rbenv.git" dest="~/.rbenv" update="no" depth="1"
-- name: make rbenv cache
-  file: path="~/.rbenv/cache" state="directory" mode="700"
-- name: install ruby-build
-  git: repo="https://github.com/rbenv/ruby-build.git" dest="~/.rbenv/plugins/ruby-build" update="no" depth="1"
-- name: link gemrc
-  file: src="{{ playbook_dir }}/roles/base/files/gemrc" dest="~/.gemrc" state="hard" force="yes"
 
 - name: install sbcl
   package: name="sbcl" state="present"
@@ -117,8 +62,6 @@
   command: "{{ playbook_dir }}/roles/base/files/bootstrap-quicklisp.sh"
   args:
     creates: ~/.quicklisp
-- name: link sbcl config
-  file: src="{{ playbook_dir }}/roles/base/files/sbclrc.lisp" dest="~/.sbclrc" state="hard" force="yes"
 
 - name: install nodenv
   git: repo="https://github.com/nodenv/nodenv.git" dest="~/.nodenv" update="no" depth="1"
