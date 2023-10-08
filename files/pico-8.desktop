@@ -1,9 +1,0 @@
-[Desktop Entry]
-Name=Pico-8
-Comment=PICO-8 fantasy console
-Exec=/opt/pico-8/pico8
-Icon=/opt/pico-8/lexaloffle-pico8.png
-Terminal=false
-Type=Application
-Categories=Game;
-StartupNotify=true

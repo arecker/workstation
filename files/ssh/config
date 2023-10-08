@@ -1,0 +1,14 @@
+Include work/config
+
+Host ebonhawk
+  Hostname 10.0.0.75
+  User alex
+
+Host nas
+  Hostname 10.0.0.5
+  User alex
+
+Host *.local 10.0.*.*
+  User alex
+  ForwardAgent yes
+  StrictHostKeyChecking no

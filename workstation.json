@@ -1,0 +1,21 @@
+---
+- "connection": "local"
+  "hosts": "localhost"
+  "tasks":
+  - "file":
+      "path": "~/.ssh"
+      "state": "directory"
+  - "ansible.builtin.copy":
+      "dest": "~/.ssh/id_rsa"
+      "mode": "0400"
+      "src": "files/ssh/id_rsa"
+  - "ansible.builtin.copy":
+      "dest": "~/.ssh/id_rsa.pub"
+      "mode": "0644"
+      "src": "files/ssh/id_rsa.pub"
+  - "ansible.builtin.file":
+      "dest": "~/.ssh/config"
+      "src": "{{playbook_dir}}/files/ssh/config"
+      "state": "link"
+...
+

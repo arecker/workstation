@@ -1,5 +1,0 @@
-pics_dir: ~/pics
-public_dir: ~/public
-bashrc_file: ~/.bashrc
-can_sudo: true
-emacs_from_src: true
