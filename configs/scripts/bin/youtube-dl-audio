@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+
+log() {
+    echo "youtube-dl-audio: $@" 1>&2;
+}
+
+log "downloading audio from $1"
+pip install --upgrade youtube-dl && youtube-dl -x -f best "$1"

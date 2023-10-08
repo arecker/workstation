@@ -1,12 +1,10 @@
 local a = import 'lib/ansible.jsonnet';
 
-local tasks = [
+local tasks = a.Dotfiles() + [
 
-  // setup SSH
-  a.Directory('~/.ssh'),
-  a.FileCopy('ssh/id_rsa', '~/.ssh/id_rsa', mode='0400'),
-  a.FileCopy('ssh/id_rsa.pub', '~/.ssh/id_rsa.pub'),
-  a.FileSymlink('ssh/config', '~/.ssh/config'),
+  // setup ssh keys
+  a.FileCopy('id_rsa', '~/.ssh/id_rsa', mode='0400'),
+  a.FileCopy('id_rsa.pub', '~/.ssh/id_rsa.pub'),
 
 ];
 

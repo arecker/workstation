@@ -11,9 +11,9 @@ local Directory(path) = {
   },
 };
 
-local FileCopy(src, dst, mode='0644') = {
+local FileCopy(name, dst, mode='0644') = {
   'ansible.builtin.copy': {
-    src: 'files/' + src,
+    src: '{{ playbook_dir }}/files/' + name,
     dest: dst,
     mode: mode,
   },
@@ -21,14 +21,28 @@ local FileCopy(src, dst, mode='0644') = {
 
 local FileSymlink(src, dst) = {
   'ansible.builtin.file': {
-    src: '{{playbook_dir}}/files/' + src,
+    src: src,
     dest: dst,
     state: 'link',
   },
 };
 
+local Dotfiles() = [
+  {
+    command: '{{ playbook_dir }}/scripts/register-dotfiles',
+    register: 'register_dotfiles',
+  },
+  Directory(path='{{ item.dir }}') {
+    with_items: '{{ register_dotfiles.stdout | from_json }}',
+  },
+  FileSymlink(src='{{ item.src }}', dst='{{ item.dst }}') {
+    with_items: '{{ register_dotfiles.stdout | from_json }}',
+  },
+];
+
 {
   Directory:: Directory,
+  Dotfiles:: Dotfiles,
   FileCopy:: FileCopy,
   FileSymlink:: FileSymlink,
   Playbook:: Playbook,

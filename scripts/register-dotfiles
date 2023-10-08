@@ -1,0 +1,34 @@
+#!./venv/bin/python
+
+"""register-dotfiles
+
+Crawl the files in workstation/configs/**/* and return a list of
+ansible symlinks.
+"""
+
+import json
+import pathlib
+
+
+def main():
+    here = pathlib.Path(__file__).parent
+    configs_dir = (here.parent / 'configs')
+
+    results = []
+
+    for subdir in configs_dir.iterdir():
+        for entry in subdir.glob('**/*'):
+            if entry.is_dir():
+                continue
+
+            results.append({
+                'src': str(entry),
+                'dst': str(pathlib.Path('~/') / entry.relative_to(subdir)),
+                'dir': str((pathlib.Path('~/') / entry.relative_to(subdir)).parent),
+            })
+
+    print(json.dumps(results, indent=True))
+
+
+if __name__ == '__main__':
+    main()

@@ -1,0 +1,60 @@
+#!/usr/bin/env python
+import argparse
+import json
+import subprocess
+import sys
+
+
+def log(msg, *args):
+    message = msg.format(*args)
+    print('reckerbot: {}'.format(message))
+
+
+try:
+    import requests
+except ImportError:
+    log('error - requests not available')
+    sys.exit(1)
+
+
+def read_webhook_url(path='slack/reckers/webhook'):
+    log('reading webhook from {}', path)
+    cmd = 'pass {}'.format(path).split(' ')
+    output = subprocess.check_output(cmd)
+    return output.strip()
+
+
+def parse_args():
+    parser = argparse.ArgumentParser()
+    parser.add_argument('--user', default='@alex')
+    parser.add_argument('message', type=str)
+    return parser.parse_args()
+
+
+def main():
+    args = parse_args()
+    url = read_webhook_url()
+
+    log('making message payload')
+    headers = {'content-type': 'application/json'}
+    payload = {
+        'text': args.message,
+        'channel': args.user,
+        'icon_emoji': ':reckerbot:',
+        'username': 'reckerbot'
+    }
+
+    log('sending message to {}', args.user)
+    response = requests.post(url, data=json.dumps(payload), headers=headers)
+
+    try:
+        response.raise_for_status()
+        log('message delivered')
+        sys.exit(0)
+    except Exception:
+        log('message failed to deliver: {}', response.status_code)
+        sys.exit(1)
+
+
+if __name__ == '__main__':
+    main()

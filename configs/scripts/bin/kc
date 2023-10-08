@@ -1,0 +1,51 @@
+#!/usr/bin/env bash
+set -e
+
+log() {
+    echo "kc: $1" >&2
+}
+
+is_empty() {
+    [ "$1" == "" ]
+}
+
+print_current() {
+    local context
+    context="$(kubectl config current-context)"
+    
+    local namespace
+    namespace="$(kubectl config view --minify -o jsonpath='{..namespace}')"
+
+    if [ "$namespace" == "" ]; then
+	echo "${context}"
+    else
+	echo "${context}:${namespace}"
+    fi
+}
+
+set_context() {
+    local context="$1"
+    kubectl config use-context "${context}" > /dev/null
+}
+
+set_namespace() {
+    local namespace="$1"
+    kubectl config set-context --current --namespace="${namespace}" > /dev/null
+}
+
+kc() {
+    local context="$1"
+    local namespace="$2"
+
+    if ! is_empty "$context"; then
+	set_context "$context"
+    fi
+
+    if ! is_empty "$namespace"; then
+	set_namespace "$namespace"
+    fi
+
+    log "using $(print_current)"
+}
+
+kc "$1" "$2"

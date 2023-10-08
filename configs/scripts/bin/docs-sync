@@ -1,0 +1,24 @@
+#!/usr/bin/env bash
+
+log() {
+    echo "docs-sync: $1"
+}
+
+sync() {
+    if [ -d "$1" ]; then
+        log "syncing $1"
+        "$HOME/bin/git-sync" -X theirs -d "$1" > /dev/null
+    else
+        log "$1 doesn't exist, skipping"
+    fi
+}
+
+docs_path() {
+    if [ "$(uname)" == "Darwin" ]; then
+        echo "$HOME/Documents"
+    else
+        echo "$HOME/docs"
+    fi
+}
+
+sync "$(docs_path)"

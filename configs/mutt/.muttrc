@@ -1,0 +1,20 @@
+set editor=emacsclient
+set realname = "Alex Recker"
+set from = "arecker@zendesk.com"
+set use_from = yes
+set envelope_from = yes
+set smtp_authenticators = 'gssapi:login'
+set smtp_url = "smtps://arecker@zendesk.com@smtp.gmail.com:465/"
+set smtp_pass = `$HOME/bin/pass-work.sh gmail`
+set imap_user = "arecker@zendesk.com"
+set imap_pass = `$HOME/bin/pass-work.sh gmail`
+set folder = "imaps://imap.gmail.com:993"
+set spoolfile = "+INBOX"
+set ssl_force_tls = yes
+bind index f imap-fetch-mail
+set charset = "utf-8"
+set record = ''
+set signature="$HOME/.emacs.d/signatures/work.txt"
+set record = "+[Gmail]/Sent Mail"
+set postponed = "+[Gmail]/Drafts"
+set mbox="imaps://imap.gmail.com/[Gmail]/All Mail"

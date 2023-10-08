@@ -2,20 +2,24 @@
 - "connection": "local"
   "hosts": "localhost"
   "tasks":
+  - "command": "{{ playbook_dir }}/scripts/register-dotfiles"
+    "register": "register_dotfiles"
   - "file":
-      "path": "~/.ssh"
+      "path": "{{ item.dir }}"
       "state": "directory"
+    "with_items": "{{ register_dotfiles.stdout | from_json }}"
+  - "ansible.builtin.file":
+      "dest": "{{ item.dst }}"
+      "src": "{{ item.src }}"
+      "state": "link"
+    "with_items": "{{ register_dotfiles.stdout | from_json }}"
   - "ansible.builtin.copy":
       "dest": "~/.ssh/id_rsa"
       "mode": "0400"
-      "src": "files/ssh/id_rsa"
+      "src": "{{ playbook_dir }}/files/id_rsa"
   - "ansible.builtin.copy":
       "dest": "~/.ssh/id_rsa.pub"
       "mode": "0644"
-      "src": "files/ssh/id_rsa.pub"
-  - "ansible.builtin.file":
-      "dest": "~/.ssh/config"
-      "src": "{{playbook_dir}}/files/ssh/config"
-      "state": "link"
+      "src": "{{ playbook_dir }}/files/id_rsa.pub"
 ...
 

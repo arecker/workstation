@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+
+export VAULT_ADDR="http://vault.local"
+
+for token in $(pass "vault/unseal"); do
+    vault operator unseal "$token"
+done

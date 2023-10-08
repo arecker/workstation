@@ -1,0 +1,24 @@
+#!/usr/bin/env ruby
+# frozen_string_literal: true
+
+def extract_repo(url)
+  pattern = %r{^(git@github.com:)?(zendesk\/)?(?<repo>.*?)(\.git)?$}
+  match = pattern.match(url)
+  if match.nil?
+    puts "could not extract repo from #{url}"
+    exit 1
+  end
+  match['repo']
+end
+
+unless ARGV.any?
+  puts 'Usage: zendesk-clone <url>'
+  exit 1
+end
+
+repo = extract_repo ARGV.first
+
+target = "~/src/work/#{repo}"
+
+puts "cloning zendesk/#{repo} -> #{target}"
+`git clone github-zendesk:zendesk/#{repo} #{target}`
