@@ -2,17 +2,9 @@
 - "connection": "local"
   "hosts": "localhost"
   "tasks":
-  - "command": "{{ playbook_dir }}/scripts/register-dotfiles"
-    "register": "register_dotfiles"
-  - "file":
-      "path": "{{ item.dir }}"
-      "state": "directory"
-    "with_items": "{{ register_dotfiles.stdout | from_json }}"
-  - "ansible.builtin.file":
-      "dest": "{{ item.dst }}"
-      "src": "{{ item.src }}"
-      "state": "link"
-    "with_items": "{{ register_dotfiles.stdout | from_json }}"
+  - "changed_when": "generate_dotfiles.stdout == \"changed\""
+    "command": "{{ playbook_dir }}/scripts/generate-dotfiles"
+    "register": "generate_dotfiles"
   - "ansible.builtin.copy":
       "dest": "~/.ssh/id_rsa"
       "mode": "0400"

@@ -27,18 +27,11 @@ local FileSymlink(src, dst) = {
   },
 };
 
-local Dotfiles() = [
-  {
-    command: '{{ playbook_dir }}/scripts/register-dotfiles',
-    register: 'register_dotfiles',
-  },
-  Directory(path='{{ item.dir }}') {
-    with_items: '{{ register_dotfiles.stdout | from_json }}',
-  },
-  FileSymlink(src='{{ item.src }}', dst='{{ item.dst }}') {
-    with_items: '{{ register_dotfiles.stdout | from_json }}',
-  },
-];
+local Dotfiles() = {
+  command: '{{ playbook_dir }}/scripts/generate-dotfiles',
+  register: 'generate_dotfiles',
+  changed_when: 'generate_dotfiles.stdout == "changed"',
+};
 
 {
   Directory:: Directory,

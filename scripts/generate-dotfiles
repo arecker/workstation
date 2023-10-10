@@ -1,0 +1,72 @@
+#!./venv/bin/python
+
+"""generate-dotfiles
+
+Generate all the dotfiles, symlinking them to workstation/configs
+"""
+
+import collections
+import logging
+import pathlib
+import sys
+
+
+here = pathlib.Path(__file__).absolute()
+configs_dir = here.parent.parent / 'configs'
+home_dir = pathlib.Path('~').expanduser()
+
+Link = collections.namedtuple('link', ['src', 'dst'])
+
+
+def scan_links():
+    for section in configs_dir.iterdir():
+        for src in section.glob('**/*'):
+            if not src.is_file():
+                continue
+
+            dst = home_dir / src.relative_to(section)
+            yield Link(src=src, dst=dst)
+
+
+def validate_link(link):
+    if not link.src.exists():
+        logging.error('src %s does not exist!', link.src)
+        sys.exit(1)
+    if not link.src.is_file():
+        logging.error('src %s is not a file!', link.src)
+        sys.exit(1)
+
+
+def main():
+    changed = False
+
+    for link in scan_links():
+        validate_link(link)
+
+        if link.dst.resolve().absolute() == link.src.absolute():
+            continue
+
+        changed = True
+
+        # ensure parents
+        link.dst.parent.mkdir(parents=True, exist_ok=True)
+
+        # delete if stale
+        if link.dst.exists():
+            link.dst.unlink()
+            logging.info('deleted old dst %s', link.dst)
+
+        link.dst.symlink_to(link.src)
+        logging.info('linked %s to %s', link.src, link.dst)
+
+    if changed:
+        print('changed')
+
+
+if __name__ == '__main__':
+    logging.basicConfig(
+        stream=sys.stderr,
+        format='generate-dotfiles: %(message)s',
+        level=logging.INFO,
+    )
+    main()
