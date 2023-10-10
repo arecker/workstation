@@ -4,14 +4,49 @@
   "tasks":
   - "changed_when": "generate_dotfiles.stdout == \"changed\""
     "command": "{{ playbook_dir }}/scripts/generate-dotfiles"
+    "name": "command: ./script/generate-dotfiles"
     "register": "generate_dotfiles"
   - "ansible.builtin.copy":
       "dest": "~/.ssh/id_rsa"
       "mode": "0400"
       "src": "{{ playbook_dir }}/files/id_rsa"
+    "name": "copy: id_rsa -> ~/.ssh/id_rsa"
   - "ansible.builtin.copy":
       "dest": "~/.ssh/id_rsa.pub"
       "mode": "0644"
       "src": "{{ playbook_dir }}/files/id_rsa.pub"
+    "name": "copy: id_rsa.pub -> ~/.ssh/id_rsa.pub"
+  - "ansible.builtin.git":
+      "dest": "~/.password-store"
+      "repo": "git@github.com:arecker/password-store.git"
+    "name": "clone: arecker/password-store -> ~/.password-store"
+  - "ansible.builtin.git":
+      "dest": "~/.pyenv"
+      "repo": "git@github.com:pyenv/pyenv.git"
+    "name": "clone: pyenv/pyenv -> ~/.pyenv"
+  - "ansible.builtin.git":
+      "dest": "~/.rbenv"
+      "repo": "git@github.com:rbenv/rbenv.git"
+    "name": "clone: rbenv/rbenv -> ~/.rbenv"
+  - "file":
+      "path": "~/.rbenv/plugins"
+      "state": "directory"
+    "name": "directory: ~/.rbenv/plugins"
+  - "ansible.builtin.git":
+      "dest": "~/.rbenv/.plugins/ruby-build"
+      "repo": "git@github.com:rbenv/ruby-build.git"
+    "name": "clone: rbenv/ruby-build -> ~/.rbenv/.plugins/ruby-build"
+  - "ansible.builtin.git":
+      "dest": "~/.goenv"
+      "repo": "git@github.com:go-nv/goenv.git"
+    "name": "clone: go-nv/goenv -> ~/.goenv"
+  - "ansible.builtin.git":
+      "dest": "~/.tfenv"
+      "repo": "git@github.com:tfutils/tfenv.git"
+    "name": "clone: tfutils/tfenv -> ~/.tfenv"
+  - "ansible.builtin.git":
+      "dest": "~/.nodenv"
+      "repo": "git@github.com:nodenv/nodenv.git"
+    "name": "clone: nodenv/nodenv -> ~/.nodenv"
 ...
 
