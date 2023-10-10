@@ -11,6 +11,9 @@ local tasks = [
   // setup passwords
   a.Clone(name='arecker/password-store', dst='~/.password-store'),
 
+  // emacs
+  a.Clone(name='arecker/emacs.d', dst='~/.emacs.d'),
+
   // python
   a.Clone(name='pyenv/pyenv', dst='~/.pyenv'),
 

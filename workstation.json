@@ -21,6 +21,10 @@
       "repo": "git@github.com:arecker/password-store.git"
     "name": "clone: arecker/password-store -> ~/.password-store"
   - "ansible.builtin.git":
+      "dest": "~/.emacs.d"
+      "repo": "git@github.com:arecker/emacs.d.git"
+    "name": "clone: arecker/emacs.d -> ~/.emacs.d"
+  - "ansible.builtin.git":
       "dest": "~/.pyenv"
       "repo": "git@github.com:pyenv/pyenv.git"
     "name": "clone: pyenv/pyenv -> ~/.pyenv"
