@@ -1,37 +1,92 @@
-local a = import 'lib/ansible.jsonnet';
+local Directory(path, mode=null) = {
+  name: std.format('directory: %s', path),
+  file: std.prune({
+    path: path,
+    state: 'directory',
+    mode: mode,
+  }),
+};
+
+local FileCopy(name, dst, mode='0644') = {
+  name: std.format('copy: %s -> %s', [name, dst]),
+  'ansible.builtin.copy': {
+    src: '{{ playbook_dir }}/files/' + name,
+    dest: dst,
+    mode: mode,
+  },
+};
+
+local Clone(name='', dst) = {
+  name: std.format('clone: %s -> %s', [name, dst]),
+  'ansible.builtin.git': {
+    repo: std.format('git@github.com:%s.git', name),
+    dest: dst,
+  },
+};
+
+local Dotfiles() = {
+  name: 'command: ./script/generate-dotfiles',
+  command: '{{ playbook_dir }}/scripts/generate-dotfiles',
+  register: 'generate_dotfiles',
+  changed_when: 'generate_dotfiles.stdout == "changed"',
+};
+
+local KeyImport(name='') = (
+  local keyPath = std.format('{{ playbook_dir }}/files/%s', name);
+  local stdin = std.format('{{ lookup("ansible.builtin.file", "%s") }}', keyPath);
+
+  {
+    name: std.format('gpg: %s', name),
+    command: 'gpg --import',
+    args: {
+      stdin: stdin,
+    },
+    register: 'key_import',
+    changed_when: '"imported: 1" in key_import.stderr',
+  }
+);
 
 local tasks = [
-  // re-generate dotfiles
-  a.Dotfiles(),
+  // dotfiles
+  Dotfiles(),
+
+  // gpg
+  Directory('~/.gnupg', mode='0700'),
+  KeyImport(name='gpg/public.gpg.asc'),
+  KeyImport(name='gpg/private.gpg.asc'),
 
   // setup ssh keys
-  a.FileCopy('id_rsa', '~/.ssh/id_rsa', mode='0400'),
-  a.FileCopy('id_rsa.pub', '~/.ssh/id_rsa.pub'),
+  FileCopy('ssh/id_rsa', '~/.ssh/id_rsa', mode='0400'),
+  FileCopy('ssh/id_rsa.pub', '~/.ssh/id_rsa.pub'),
 
   // setup passwords
-  a.Clone(name='arecker/password-store', dst='~/.password-store'),
+  Clone(name='arecker/password-store', dst='~/.password-store'),
 
   // emacs
-  a.Clone(name='arecker/emacs.d', dst='~/.emacs.d'),
+  Clone(name='arecker/emacs.d', dst='~/.emacs.d'),
 
   // python
-  a.Clone(name='pyenv/pyenv', dst='~/.pyenv'),
+  Clone(name='pyenv/pyenv', dst='~/.pyenv'),
 
   // ruby
-  a.Clone(name='rbenv/rbenv', dst='~/.rbenv'),
-  a.Directory('~/.rbenv/plugins'),
-  a.Clone(name='rbenv/ruby-build', dst='~/.rbenv/.plugins/ruby-build'),
+  Clone(name='rbenv/rbenv', dst='~/.rbenv'),
+  Directory('~/.rbenv/plugins'),
+  Clone(name='rbenv/ruby-build', dst='~/.rbenv/.plugins/ruby-build'),
 
   // go
-  a.Clone(name='go-nv/goenv', dst='~/.goenv'),
+  Clone(name='go-nv/goenv', dst='~/.goenv'),
 
   // terraform
-  a.Clone(name='tfutils/tfenv', dst='~/.tfenv'),
+  Clone(name='tfutils/tfenv', dst='~/.tfenv'),
 
   // nodejs
-  a.Clone(name='nodenv/nodenv', dst='~/.nodenv'),
+  Clone(name='nodenv/nodenv', dst='~/.nodenv'),
 ];
 
 [
-  a.Playbook(tasks=tasks),
+  {
+    hosts: 'localhost',
+    connection: 'local',
+    tasks: tasks,
+  },
 ]

@@ -1,7 +1,7 @@
 .PHONY: all
 all: workstation.json bootstrap
 
-workstation.json: workstation.jsonnet $(wildcard lib/*.jsonnet)
+workstation.json: workstation.jsonnet
 	jsonnet -e 'std.manifestYamlStream([(import "$<")])' -S > $@
 
 bootstrap: venv/bin/ansible-playbook

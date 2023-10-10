@@ -6,16 +6,33 @@
     "command": "{{ playbook_dir }}/scripts/generate-dotfiles"
     "name": "command: ./script/generate-dotfiles"
     "register": "generate_dotfiles"
+  - "file":
+      "mode": "0700"
+      "path": "~/.gnupg"
+      "state": "directory"
+    "name": "directory: ~/.gnupg"
+  - "args":
+      "stdin": "{{ lookup(\"ansible.builtin.file\", \"{{ playbook_dir }}/files/gpg/public.gpg.asc\") }}"
+    "changed_when": "\"imported: 1\" in key_import.stderr"
+    "command": "gpg --import"
+    "name": "gpg: gpg/public.gpg.asc"
+    "register": "key_import"
+  - "args":
+      "stdin": "{{ lookup(\"ansible.builtin.file\", \"{{ playbook_dir }}/files/gpg/private.gpg.asc\") }}"
+    "changed_when": "\"imported: 1\" in key_import.stderr"
+    "command": "gpg --import"
+    "name": "gpg: gpg/private.gpg.asc"
+    "register": "key_import"
   - "ansible.builtin.copy":
       "dest": "~/.ssh/id_rsa"
       "mode": "0400"
-      "src": "{{ playbook_dir }}/files/id_rsa"
-    "name": "copy: id_rsa -> ~/.ssh/id_rsa"
+      "src": "{{ playbook_dir }}/files/ssh/id_rsa"
+    "name": "copy: ssh/id_rsa -> ~/.ssh/id_rsa"
   - "ansible.builtin.copy":
       "dest": "~/.ssh/id_rsa.pub"
       "mode": "0644"
-      "src": "{{ playbook_dir }}/files/id_rsa.pub"
-    "name": "copy: id_rsa.pub -> ~/.ssh/id_rsa.pub"
+      "src": "{{ playbook_dir }}/files/ssh/id_rsa.pub"
+    "name": "copy: ssh/id_rsa.pub -> ~/.ssh/id_rsa.pub"
   - "ansible.builtin.git":
       "dest": "~/.password-store"
       "repo": "git@github.com:arecker/password-store.git"
