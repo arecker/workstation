@@ -1,0 +1,19 @@
+#!/usr/bin/env bash
+
+set -e
+
+log() {
+    echo "install-quicklisp: $1" 1>&2
+}
+
+TMP="$(mktemp -d -t "install-quicklisp")"
+cd "${TMP}"
+log "created temp directory ${TMP}"
+
+curl -s -O https://beta.quicklisp.org/quicklisp.lisp
+log "downloaded script"
+
+sbcl \
+    --load quicklisp.lisp \
+    --eval '(quicklisp-quickstart:install :path "~/.quicklisp")' \
+    --non-interactive

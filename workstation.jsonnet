@@ -26,7 +26,7 @@ local Clone(name='', dst) = {
 
 local Dotfiles() = {
   name: 'command: ./script/generate-dotfiles',
-  command: '{{ playbook_dir }}/scripts/generate-dotfiles',
+  'ansible.builtin.command': '{{ playbook_dir }}/scripts/generate-dotfiles',
   register: 'generate_dotfiles',
   changed_when: 'generate_dotfiles.stdout == "changed"',
 };
@@ -37,7 +37,7 @@ local KeyImport(name='') = (
 
   {
     name: std.format('gpg: %s', name),
-    command: 'gpg --import',
+    'ansible.builtin.command': 'gpg --import',
     args: {
       stdin: stdin,
     },
@@ -45,6 +45,14 @@ local KeyImport(name='') = (
     changed_when: '"imported: 1" in key_import.stderr',
   }
 );
+
+local InstallQuicklisp() = {
+  name: 'command: ./script/install-quicklisp',
+  'ansible.builtin.command': '{{ playbook_dir }}/scripts/install-quicklisp',
+  args: {
+    creates: '~/.quicklisp',
+  },
+};
 
 local tasks = [
   // dotfiles
@@ -81,6 +89,9 @@ local tasks = [
 
   // nodejs
   Clone(name='nodenv/nodenv', dst='~/.nodenv'),
+
+  // common lisp
+  InstallQuicklisp(),
 ];
 
 [

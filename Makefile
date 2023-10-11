@@ -1,11 +1,11 @@
 .PHONY: all
-all: workstation.json bootstrap
+all: workstation.yml bootstrap
 
-workstation.json: workstation.jsonnet
+workstation.yml: workstation.jsonnet
 	jsonnet -e 'std.manifestYamlStream([(import "$<")])' -S > $@
 
 bootstrap: venv/bin/ansible-playbook
-	$< --vault-password-file password.txt workstation.json
+	$< --vault-password-file password.txt workstation.yml
 
 venv/bin/ansible-playbook:
 	rm -rf ./venv

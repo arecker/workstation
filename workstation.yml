@@ -2,8 +2,8 @@
 - "connection": "local"
   "hosts": "localhost"
   "tasks":
-  - "changed_when": "generate_dotfiles.stdout == \"changed\""
-    "command": "{{ playbook_dir }}/scripts/generate-dotfiles"
+  - "ansible.builtin.command": "{{ playbook_dir }}/scripts/generate-dotfiles"
+    "changed_when": "generate_dotfiles.stdout == \"changed\""
     "name": "command: ./script/generate-dotfiles"
     "register": "generate_dotfiles"
   - "file":
@@ -11,16 +11,16 @@
       "path": "~/.gnupg"
       "state": "directory"
     "name": "directory: ~/.gnupg"
-  - "args":
+  - "ansible.builtin.command": "gpg --import"
+    "args":
       "stdin": "{{ lookup(\"ansible.builtin.file\", \"{{ playbook_dir }}/files/gpg/public.gpg.asc\") }}"
     "changed_when": "\"imported: 1\" in key_import.stderr"
-    "command": "gpg --import"
     "name": "gpg: gpg/public.gpg.asc"
     "register": "key_import"
-  - "args":
+  - "ansible.builtin.command": "gpg --import"
+    "args":
       "stdin": "{{ lookup(\"ansible.builtin.file\", \"{{ playbook_dir }}/files/gpg/private.gpg.asc\") }}"
     "changed_when": "\"imported: 1\" in key_import.stderr"
-    "command": "gpg --import"
     "name": "gpg: gpg/private.gpg.asc"
     "register": "key_import"
   - "ansible.builtin.copy":
@@ -69,5 +69,9 @@
       "dest": "~/.nodenv"
       "repo": "git@github.com:nodenv/nodenv.git"
     "name": "clone: nodenv/nodenv -> ~/.nodenv"
+  - "ansible.builtin.command": "{{ playbook_dir }}/scripts/install-quicklisp"
+    "args":
+      "creates": "~/.quicklisp"
+    "name": "command: ./script/install-quicklisp"
 ...
 
