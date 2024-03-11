@@ -5,4 +5,5 @@ log() {
 }
 
 log "downloading audio from $1"
-pip install --upgrade youtube-dl && youtube-dl -x -f best "$1"
+# pip install --upgrade youtube-dl && youtube-dl -x -f best "$1"
+yt-dlp -x -f b "$1"
