@@ -93,6 +93,12 @@ if [ -d "$HOME/.cargo/env" ]; then
     . "$HOME/.cargo/env"
 fi
 
+# asdf
+if [ -d "$HOME/.asdf" ]; then
+    . "$HOME/.asdf/asdf.sh"
+fi
+
+
 # local bin
 export PATH="$HOME/bin:$PATH"
 export PATH="$HOME/.local/bin:$PATH"
