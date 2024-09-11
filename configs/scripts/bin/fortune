@@ -2,6 +2,7 @@
 import json
 import pathlib
 import random
+import textwrap
 
 
 def main():
@@ -9,6 +10,7 @@ def main():
     with target.open('r') as f:
         quotes = json.load(f)
     author, text = random.choice(quotes)
+    text = textwrap.fill(text, width=60)
     print('"{}"\n-- {}'.format(text, author))
 
 

@@ -21,4 +21,4 @@ repo = extract_repo ARGV.first
 target = "~/src/work/#{repo}"
 
 puts "cloning zendesk/#{repo} -> #{target}"
-`git clone github-zendesk:zendesk/#{repo} #{target}`
+`git clone git@github.com:zendesk/#{repo} #{target}`

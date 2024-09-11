@@ -62,14 +62,6 @@ if [ -d "$HOME/.tfenv/bin" ]; then
     export PATH="$HOME/.tfenv/bin:$PATH"
 fi
 
-# ssh
-if [ -f "$HOME/.ssh/id_rsa" ]; then
-    ssh-add -K "$HOME/.ssh/id_rsa" 2>/dev/null
-fi
-if [ -f "$HOME/.ssh/work/id_rsa" ]; then
-    ssh-add -K "$HOME/.ssh/work/id_rsa" 2>/dev/null
-fi
-
 # gcloud
 if [ -d "/usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/" ]; then
     . /usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.bash.inc
