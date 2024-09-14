@@ -47,31 +47,5 @@ if [ -f "$HOME/bin/bashrc-work" ]; then
     source "$HOME/bin/bashrc-work"
 fi
 
-########################################################################
-# # This is for things I don't use, but they are there if I need them. #
-########################################################################
-
-# rust
-# if [ -d "$HOME/.cargo/env" ]; then
-#     . "$HOME/.cargo/env"
-# fi
-
-# asdf
-# if [ -d "$HOME/.asdf" ]; then
-#     . "$HOME/.asdf/asdf.sh"
-# fi
-
-# nodenv
-# (uncomment if this language ever becomes cool again)
-# if [ -d "$HOME/.nodenv" ]; then
-#     export PATH="$HOME/.nodenv/bin:$PATH"
-#     eval "$(nodenv init -)"
-# fi
-
-# poetry
-# if [ -d "$HOME/.poetry/bin" ]; then
-#     export PATH="$HOME/.poetry/bin:$PATH"
-# fi
-
 # cowsay "$(fortune)" || echo "Warning: cowsay is not installed (you might literally die)"
 fortune --comment '## ' --wrap 72
