@@ -30,48 +30,17 @@ fi
 export EDITOR="emacsclient"
 export GPG_TTY=$(tty)
 
-# python
-export WORKON_HOME="$HOME/.virtualenvs"
-if [ -d "$HOME/.pyenv" ]; then
-    export PYENV_ROOT="$HOME/.pyenv"
-    export PATH="$PYENV_ROOT/bin:$PATH"
-    eval "$(pyenv init --path)"
-    eval "$(pyenv init -)"
-    # eval "$(pyenv virtualenv-init -)"
-fi
-
-# rbenv
-if [ -d "$HOME/.rbenv" ]; then
-    export PATH="$HOME/.rbenv/bin:$PATH"
-    eval "$(rbenv init -)"
-fi
-
-# tfenv
-if [ -d "$HOME/.tfenv/bin" ]; then
-    export PATH="$HOME/.tfenv/bin:$PATH"
-fi
-
-# gcloud
-if [ -d "/usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/" ]; then
-    . /usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.bash.inc
-    . /usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/completion.bash.inc
-fi
+# asdf
+. "$HOME/.asdf/asdf.sh"
+. "$HOME/.asdf/completions/asdf.bash"
 
 # hack for openvpn installed by homebrew
 if [ "$(uname)" == "Darwin" ]; then
     export PATH="/usr/local/sbin:$PATH"
 fi
 
-# GO
-export GOENV_ROOT="$HOME/.goenv"
-export PATH="$GOENV_ROOT/bin:$PATH"
-eval "$(goenv init -)"
-export PATH="$GOROOT/bin:$PATH"
-export PATH="$PATH:$GOPATH/bin"
-
 # local bin
 export PATH="$HOME/bin:$PATH"
-export PATH="$HOME/.local/bin:$PATH"
 
 # Load work stuff
 if [ -f "$HOME/bin/bashrc-work" ]; then

@@ -73,22 +73,8 @@ local tasks = [
   // emacs
   Clone(name='arecker/emacs.d', dst='~/.emacs.d'),
 
-  // python
-  Clone(name='pyenv/pyenv', dst='~/.pyenv'),
-
-  // ruby
-  Clone(name='rbenv/rbenv', dst='~/.rbenv'),
-  Directory('~/.rbenv/plugins'),
-  Clone(name='rbenv/ruby-build', dst='~/.rbenv/.plugins/ruby-build'),
-
-  // go
-  Clone(name='go-nv/goenv', dst='~/.goenv'),
-
-  // terraform
-  Clone(name='tfutils/tfenv', dst='~/.tfenv'),
-
-  // nodejs
-  Clone(name='nodenv/nodenv', dst='~/.nodenv'),
+  // asdf
+  Clone(name='asdf-vm/asdf', dst='~/.asdf'),
 
   // common lisp
   InstallQuicklisp(),
