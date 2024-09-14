@@ -37,24 +37,13 @@ if [ -d "$HOME/.pyenv" ]; then
     export PATH="$PYENV_ROOT/bin:$PATH"
     eval "$(pyenv init --path)"
     eval "$(pyenv init -)"
-    eval "$(pyenv virtualenv-init -)"
-fi
-
-# poetry
-if [ -d "$HOME/.poetry/bin" ]; then
-    export PATH="$HOME/.poetry/bin:$PATH"
+    # eval "$(pyenv virtualenv-init -)"
 fi
 
 # rbenv
 if [ -d "$HOME/.rbenv" ]; then
     export PATH="$HOME/.rbenv/bin:$PATH"
     eval "$(rbenv init -)"
-fi
-
-# nodenv
-if [ -d "$HOME/.nodenv" ]; then
-    export PATH="$HOME/.nodenv/bin:$PATH"
-    eval "$(nodenv init -)"
 fi
 
 # tfenv
@@ -80,25 +69,40 @@ eval "$(goenv init -)"
 export PATH="$GOROOT/bin:$PATH"
 export PATH="$PATH:$GOPATH/bin"
 
-# Rust
-if [ -d "$HOME/.cargo/env" ]; then
-    . "$HOME/.cargo/env"
-fi
-
-# asdf
-if [ -d "$HOME/.asdf" ]; then
-    . "$HOME/.asdf/asdf.sh"
-fi
-
-
 # local bin
 export PATH="$HOME/bin:$PATH"
 export PATH="$HOME/.local/bin:$PATH"
 
-alias pyenv-install-global-locally="cp $HOME/.pyenv/version ./.python-version"
-
+# Load work stuff
 if [ -f "$HOME/bin/bashrc-work" ]; then
     source "$HOME/bin/bashrc-work"
 fi
 
-cowsay "$(fortune)" || cowsay "Warning: cowsay is not installed!"
+########################################################################
+# # This is for things I don't use, but they are there if I need them. #
+########################################################################
+
+# rust
+# if [ -d "$HOME/.cargo/env" ]; then
+#     . "$HOME/.cargo/env"
+# fi
+
+# asdf
+# if [ -d "$HOME/.asdf" ]; then
+#     . "$HOME/.asdf/asdf.sh"
+# fi
+
+# nodenv
+# (uncomment if this language ever becomes cool again)
+# if [ -d "$HOME/.nodenv" ]; then
+#     export PATH="$HOME/.nodenv/bin:$PATH"
+#     eval "$(nodenv init -)"
+# fi
+
+# poetry
+# if [ -d "$HOME/.poetry/bin" ]; then
+#     export PATH="$HOME/.poetry/bin:$PATH"
+# fi
+
+# cowsay "$(fortune)" || echo "Warning: cowsay is not installed (you might literally die)"
+fortune --comment '## ' --wrap 72
