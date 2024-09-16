@@ -47,5 +47,4 @@ if [ -f "$HOME/bin/bashrc-work" ]; then
     source "$HOME/bin/bashrc-work"
 fi
 
-# cowsay "$(fortune)" || echo "Warning: cowsay is not installed (you might literally die)"
-fortune --comment '## ' --wrap 72
+cowsay "$(fortune)" || echo "Warning: cowsay is not installed (you might literally die)"
