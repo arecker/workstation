@@ -6,12 +6,13 @@ is_mac() {
     [[ "$(uname)" == "Darwin" ]]
 }
 
+is_arm() {
+    [[ "$(uname -m)" == "arm64" ]]
+}
+
 # aliases
 alias be="bundle exec"
 alias k='kubectl'
-alias plexbot="reckerbot --user '#plex'"
-alias aws-whoami="aws sts get-caller-identity | jq -r '.Arn'"
-alias aws-local='aws --profile local --endpoint-url http://localhost:4566/'
 
 if ! is_mac; then
     alias ls="ls --color"
@@ -24,15 +25,22 @@ if [ -d "/opt/homebrew/bin" ]; then
 fi
 
 # emacs
-if is_mac; then
-    export PATH="/Applications/Emacs.app/Contents/MacOS/bin/:$PATH"
+if is_mac; then  # the emacsclient binary is buried somewhere in the EmacsForOSX application
+    if is_arm; then
+        export PATH="/Applications/Emacs.app/Contents/MacOS/bin-arm64-11/:$PATH"
+    else
+        export PATH="/Applications/Emacs.app/Contents/MacOS/bin-x86_64-10_14/:$PATH"
+    fi
 fi
 export EDITOR="emacsclient"
 export GPG_TTY=$(tty)
 
 # asdf
-. "$HOME/.asdf/asdf.sh"
-. "$HOME/.asdf/completions/asdf.bash"
+export ASDF_GOLANG_MOD_VERSION_ENABLED=true
+if [ -d "$HOME/.asdf" ]; then
+    . "$HOME/.asdf/asdf.sh"
+    . "$HOME/.asdf/completions/asdf.bash"
+fi
 
 # hack for openvpn installed by homebrew
 if [ "$(uname)" == "Darwin" ]; then
